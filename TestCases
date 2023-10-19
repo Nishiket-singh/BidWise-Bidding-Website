@@ -16,3 +16,271 @@ Expected Outcome
 The Sign Up form closes, and the user is presented with the main UI window.
 
 
+Test ID
+ 2
+Category
+Use Case:1.1
+Requirements Coverage
+UC1-Unsuccessful-User-SIgnUp
+Initial Condition 
+The system is initiated and the user chooses to Sign Up.
+Procedure
+1. The user is showcased the Sign Up screen
+2. The user has to provide their credentials to successfully sign up and store their data in the database
+3. The user only fills in some but not all the information required.
+4. The user clicks on Sign Up 
+5. The user sign-up is unsuccessful and an error message appears.
+Expected Outcome
+Page is refreshed and the user is still on the SignUp screen with an error message which reminds the user that they are missing some important fields required for a successful Sign Up.
+
+
+
+Test ID
+ 3
+Category
+Use Case: 1.2
+Requirements Coverage
+UC1-Successful-User-SignIn
+Initial Condition 
+The system is initiated and the user chooses to Sign In.
+Procedure
+1. The user selects Sign In
+2. The user provides a username
+3. The user provides a password 
+4. The user logs-in into the system and is presented with the main UI window
+Expected Outcome
+The Sign In form closes, and the user is presented with the main UI window.
+
+
+
+Test ID
+ 4
+Category
+Use Case:1.2
+Requirements Coverage
+UC1-Unsuccessful-User-SignIn
+Initial Condition 
+The system is initiated and the user chooses to Sign In.
+Procedure
+1. The user selects Sign In
+2. The user provides a username
+3. The user provides an incorrect password 
+4. The user sign-in is unsuccessful and an error message appears.
+Expected Outcome
+Page is refreshed and the user is still on the SignIn screen with an error message which alerts the user of an incorrect password and an option to “Forget Password”
+
+
+
+Test ID
+ 5
+Category
+Use Case: 3
+Requirements Coverage
+UC3-Successful-BiddingPrice-Update
+Initial Condition 
+The user should be logged in and on the Forward auction bidding page.
+Procedure
+1. The user inputs bidding price > current price 
+2. The user clicks Bid button
+3. The user is presented with the refreshed UI window having the new highest bidding price and highest bidder.
+Expected Outcome
+Page is refreshed and the user is presented with the refreshed UI window having the new highest bidding price and highest bidder.
+
+
+
+Test ID
+ 6
+Category
+Use Case: 3
+Requirements Coverage
+UC3-Unsuccessful-BiddingPrice-Update
+Initial Condition 
+The user should be logged in and on the Forward auction bidding page.
+Procedure
+1. The user inputs bidding price < current price 
+2. The user clicks Bid button
+3. The user is presented with the refreshed UI window having the same bidding price and same highest bidder.
+Expected Outcome
+Page is refreshed and the user is presented with the refreshed UI window having the same bidding price and highest bidder.
+
+
+
+
+
+
+Test ID
+ 7
+Category
+Use Case: 3
+Requirements Coverage
+UC3-Successful-AuctionEndPage-Update
+Initial Condition 
+The user should be logged in and on Forward auction the bidding page and the time remaining =0.
+Procedure
+1. The user should be on the bidding page. 
+2. The remaining time should be equal to 0.
+3. The user is presented with the Auction end page.
+Expected Outcome
+Page is refreshed and the user is presented with the Auction end page.
+
+
+
+Test ID
+ 8
+Category
+Use Case: 3.2
+Requirements Coverage
+UC3-Successful-AuctionEndPage-Update
+Initial Condition 
+The user should be logged in and on the Dutch auction bidding page.
+Procedure
+1. The user clicks the Buy Now button.
+2. The user is presented with the Auction end page.
+Expected Outcome
+The user is presented with the Auction end page.
+
+
+
+Test ID
+ 9
+Category
+Use Case: 2.1
+Requirements Coverage
+UC2.1-Successful-ItemSearch
+Initial Condition 
+User looks up the name of an item
+Procedure
+1. The user goes to the search bar
+2. The user provides a item name
+3. The user clicks the search icon
+4.A new page opens displaying the item details
+Expected Outcome
+The item with its image, tag and price is displayed as the search button is clicked.
+Notes
+Item names should be typed accurately, but related items should also be displayed.
+
+
+
+Test ID
+ 10
+Category
+Use Case:2.2
+Requirements Coverage
+UC2.2-Successful-Auction Page
+Initial Condition 
+User looks up the auctioned items
+Procedure
+1. The user goes to the auction page
+Expected Outcome
+The auctioned items with their bid and time remaining are showed
+Notes
+It should auto update for new bids
+
+
+
+Test ID
+ 11
+Category
+Use Case:2.3
+Requirements Coverage
+UC2.3-Successful-Item Selection-New Window
+Initial Condition 
+User selects an item from the auction menu
+Procedure
+1. The user goes to the auction page
+2. The user selects an item
+3. New window appears with all relevant item and auction information
+Expected Outcome
+The auction details and the item details are shown on a new page upon clicking an item icon
+Notes
+All the auction related details should be periodically synced.
+
+Test ID
+ 12
+Category
+Use Case:2.3
+Requirements Coverage
+UC2.3-Successful-Multiple Windows-Multiple Bids
+Initial Condition 
+Accepting multiple bids from parallel log-in sessions
+Procedure
+1. The user 1 puts a bid on an item
+2. The user 2 puts a bid on the same item
+Expected Outcome
+The first bid is updated in the second window and the bid from the second window is update on the first window
+Notes
+Checking for concurrent bids
+
+
+
+Test ID
+ 13
+Category
+Use Case:5
+Requirements Coverage
+UC5-Successful-Payment Information-User Address
+Initial Condition 
+User signs-in and accesses payment information
+Procedure
+1. The user goes to payment information
+Expected Outcome
+The user address is displayed on the payment information which he had provided during the sign up
+Notes
+The address needs to be validated by a location api
+
+Test ID
+ 14
+Category
+Use Case:5
+Requirements Coverage
+UC5-Unsuccessful-Payment-Credit Card Verification
+Initial Condition 
+User adds his payment details
+Procedure
+1. The user goes to payment tab
+2. The user provides his credit card details
+3. Upon entering the wrong credit card, the UI shows a red cross to signify the incorrectness and ask you to enter a valid credit card
+Expected Outcome
+It shouldn’t accept a fake credit card with fewer or higher than 16 digits
+Notes
+Error tab letting the user know that the credit card number is wrong
+
+
+
+Test ID
+ 15
+Category
+Use Case:5
+Requirements Coverage
+UC5-Unsuccessful-Payment Information-Expiry Date Verification
+Initial Condition 
+User signs-in and accesses payment information
+Procedure
+1. The user goes to payment information
+2. The user provides his credit card details
+3. Upon entering the wrong expiry date, the UI shows a red cross to signify the incorrectness and ask you to enter a valid expiry date.
+Expected Outcome
+Error tab letting the user know if the expiry date is legal or not
+Notes
+Expiry date cannot be before the date that the application is run on
+
+
+
+Test ID
+ 16
+Category
+Use Case:5
+Requirements Coverage
+UC5-Successful-Payment Information-Submit Button
+Initial Condition 
+User signs-in and accesses payment information
+Procedure
+1. The user goes to payment information
+2. The user provides an payment details
+3. The user clicks on the submit button
+4. The user lands on the Receipt Page upon clicking the submit button. 
+Expected Outcome
+The user lands on the Receipt Page upon clicking the submit button. 
+Notes
+The receipt page should also show possible shipping details.
+
