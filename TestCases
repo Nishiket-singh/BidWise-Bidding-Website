@@ -1,1 +1,18 @@
+Test ID
+ 1
+Category
+Use Case: 1.1
+Requirements Coverage
+UC1-Successful-User-SignUp
+Initial Condition 
+The system is initiated and the user chooses to Sign Up.
+Procedure
+1. The user is showcased the Sign Up screen
+2. The user has to provide their credentials to successfully sign up and store their data in the database
+3. The user fills all the information required.
+4. The user clicks on Sign Up 
+5. The user signs-up into the system and is presented with the main UI window
+Expected Outcome
+The Sign Up form closes, and the user is presented with the main UI window.
+
 
