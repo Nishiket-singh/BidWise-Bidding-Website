@@ -17,17 +17,18 @@ import java.util.UUID;
 @Table(name = "tokens")
 public class AuthenticationToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
+    @Column(name="token")
     private String token;
 
-    @Column(name = "created_date")
+    @Column(name = "createddate")
     private Date createdDate;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
+    @JoinColumn(nullable = false, name = "userid")
     private User user;
 
     public String getToken() {

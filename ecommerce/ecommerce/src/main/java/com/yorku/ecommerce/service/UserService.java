@@ -48,7 +48,7 @@ public class UserService {
             e.printStackTrace();
         }
 
-        User user = new User(signupDto.getFirstName(), signupDto.getLastName(),
+        User user = new User(signupDto.getFirstname(), signupDto.getLastname(),
                 signupDto.getEmail(), encryptedpassword);
 
         userRepository.save(user);
