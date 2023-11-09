@@ -49,8 +49,7 @@ public class UserService {
 //            e.printStackTrace();
 //        }
 
-        User user = new User(signupDto.getFirstname(), signupDto.getLastname(),
-                signupDto.getEmail(), encryptedpassword);
+        User user = new User(signupDto.getFirstname(), signupDto.getLastname(),signupDto.getEmail(), encryptedpassword, signupDto.getStreetaddress(), signupDto.getPostalcode(), signupDto.getCity(), signupDto.getCountry());
 
         userRepository.save(user);
 

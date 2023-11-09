@@ -22,7 +22,7 @@ public class Product {
     private String description;
     
     @Column(name = "initialprice")
-    private String initialprice;
+    private int initialprice;
     
     @Column(name = "totaltime")
     private String totaltime;
@@ -57,12 +57,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getInitialprice() {
+	public int getInitialprice() {
 		return initialprice;
 	}
 
-	public void setInitialprice(String initialprice) {
-		this.initialprice = initialprice;
+	public void setInitialprice(int initialPrice) {
+		this.initialprice = initialPrice;
 	}
 
 	public String getTotaltime() {
@@ -89,8 +89,23 @@ public class Product {
 		this.shippingtime = shippingtime;
 	}
 
+	public Product() {
+		
+	}
 	
-
+	public Product(int id) {
+		this.id= id;
+	}
+	
+	public Product(int id, String name, String description, int initialprice, String totaltime, String auctiontype, String shippingtime) {
+		this.id= id;
+		this.name = name;
+		this.description = description;
+		this.initialprice = initialprice;
+		this.totaltime = totaltime;
+		this.auctiontype = auctiontype;
+		this.shippingtime = shippingtime;
+	}
    
 	
 }

@@ -26,7 +26,22 @@ public class User {
 
     @Column(name = "password")
     private String password;
+    
+    @Column(name = "streetaddress")
+    private String streetaddress;
 
+    @Column(name = "postalcode")
+    private String postalcode;
+    
+    @Column(name = "city")
+    private String city;
+    
+    @Column(name = "country")
+    private String country;
+    
+    
+    
+    
     public Integer getId() {
         return id;
     }
@@ -67,11 +82,47 @@ public class User {
         this.password = passwoprd;
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public String getStreetaddress() {
+		return streetaddress;
+	}
+
+	public void setStreetaddress(String streetaddress) {
+		this.streetaddress = streetaddress;
+	}
+
+	public String getPostalcode() {
+		return postalcode;
+	}
+
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public User(String firstName, String lastName, String email, String password, String streetaddress, String postalcode, String city, String country ) {
     	this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.streetaddress = streetaddress;
+        this.postalcode = postalcode;
+        this.city = city;
+        this.country = country;
     }
 
     public User() {

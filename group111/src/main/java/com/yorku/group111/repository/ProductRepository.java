@@ -11,5 +11,5 @@ import com.yorku.group111.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	List<Product> findByItemNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String itemName, String description);
+	//List<Product> findByItemNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String itemName, String description);
 }
