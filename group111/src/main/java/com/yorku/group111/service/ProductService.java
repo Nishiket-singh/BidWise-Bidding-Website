@@ -45,6 +45,8 @@ public class ProductService {
     public void selectProduct(Integer productId) {
     	httpsession.setAttribute("productId", productId );
     }
+    
+    
 //    public void updateProduct(ProductDto productDto, Integer productId) throws Exception {
 //        Optional<Product> optionalProduct = productRepository.findById(productId);
 //        // throw an exception if product does not exists
