@@ -16,16 +16,16 @@ import com.yorku.group111.service.UserService;
 
 public class OrderController{
 	
-	@PostMapping("/confirm-payment")
-	public void confirmPayment(@RequestParam Integer itemId, @RequestParam Integer userId) throws Exception {
-		
-//		Product product = new Product();
-//		p.getProductById(itemId);
-		
-	    // Retrieve the product and user details using Request Parameters
-		//TO-DO for some reason getProductById doesn't work
-	}
-	
+//	@PostMapping("/confirm-payment")
+//	public void confirmPayment(@RequestParam Integer itemId, @RequestParam Integer userId) throws Exception {
+//		
+////		Product product = new Product();
+////		p.getProductById(itemId);
+//		
+//	    // Retrieve the product and user details using Request Parameters
+//		//TO-DO for some reason getProductById doesn't work
+//	}
+//	
 
 	
 	
