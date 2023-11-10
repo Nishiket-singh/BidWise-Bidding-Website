@@ -10,3 +10,6 @@ VALUES
 ('rs', 'brpo8', 170, '2:00:00:00', 'Forward', 13 ),
 ('t', 'brpo9', 180, '14:00:00:00', 'Dutch', 15 ),
 ('xyz', 'brpo10', 190, '20:00:00:00', 'Forward',6);
+
+INSERT INTO HIGHESTBIDS(HIGHESTBIDAMOUNT, PRODUCTID)
+SELECT INITIALPRICE, ID FROM PRODUCTS;

@@ -13,6 +13,8 @@ import com.yorku.group111.repository.HighestBidRepository;
 import com.yorku.group111.repository.ProductRepository;
 import com.yorku.group111.repository.TokenRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Service
@@ -30,12 +32,14 @@ public class BiddingService {
 	@Autowired
 	private HighestBidRepository highestbidRepository;
 	
+	@Autowired
+	private HttpSession httpsession;
+	
 	public BiddingDto getItemAndForwardBiddingDetails() {
-		Integer productid = 2; // to come from catalogue controller selected by the user through httpSession
-		
+		Integer productid =  (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
+		System.out.println(productid);
 		//Get product info using product repository.
-		Product product = productRepository.getReferenceById(productid); // change this method when changing the spring version.deprecated probably 
-		
+		Product product = productRepository.getReferenceById(productid); 
 		//Get highest bid info using highestbidRepo
 		HighestBid highestbid = highestbidRepository.findByProduct(product); // highest bid should never be null by our logic
 		
@@ -43,7 +47,7 @@ public class BiddingService {
 		if(highestbid.getUser() != null) {
 			highestBidderName = highestbid.getUser().getFirstName();
 		}
-		// change these to actual product info when product table fully implemented
+		// 
 		BiddingDto biddingDto = new BiddingDto( product.getName(),product.getDescription(), product.getShippingtime(), highestbid.getHighestbidamount(), highestBidderName);
 		
 		return biddingDto;
@@ -51,13 +55,13 @@ public class BiddingService {
 	
 	
 	public String submitForwardBid(Integer bidamount, String authorizationToken) {
-		Integer productid = 2; // to come from catalogue controller selected by the user through httpSession
+		Integer productid = (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
 		
 		authorizationToken = authorizationToken.split(" ")[1];
-		Integer userid = tokenRepository.findByToken(authorizationToken).getUser().getId();
+		Integer userid = tokenRepository.findByToken(authorizationToken).getUser().getId(); // id of user who is making the bid
 		
 		// check if this is higher than bids for this item
-		HighestBid currentHighestBid = highestbidRepository.findByUser(new User(userid));
+		HighestBid currentHighestBid = highestbidRepository.findByProduct(new Product(productid)); // will never be null
 		
 		
 		Integer currentHighestBidAmount = currentHighestBid.getHighestbidamount();
@@ -68,6 +72,9 @@ public class BiddingService {
 				
 			// update the highest bid table
 			currentHighestBid.setHighestbidamount(bidamount);
+			if(currentHighestBid.getUser() == null) { // first bid for this item
+				currentHighestBid.setUser(new User(userid));
+			}
 			highestbidRepository.save(currentHighestBid);
 		}
 		else {

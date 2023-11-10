@@ -43,7 +43,7 @@ public class ProductService {
     }
 
     public void selectProduct(Integer productId) {
-    	httpsession.setAttribute("productId", productId );
+    	httpsession.setAttribute("productid", productId );
     }
     
     
