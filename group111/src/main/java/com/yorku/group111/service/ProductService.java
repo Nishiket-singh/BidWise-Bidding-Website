@@ -9,6 +9,7 @@ import com.yorku.group111.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,15 @@ public class ProductService {
     public ProductDto getProductDto(Product product) {
         ProductDto productDto = new ProductDto(product.getName(), product.getInitialprice(),product.getAuctiontype(), product.getShippingtime());
         return productDto;
+    }
+    
+    public Product getProductById(Integer productId) throws Exception {
+    	Optional<Product> OptProduct = productRepository.findById(productId);
+    	if (!OptProduct.isPresent()) {
+          throw new Exception("product not present");
+      }
+    	Product product = OptProduct.get();
+    	return product;
     }
     
     
