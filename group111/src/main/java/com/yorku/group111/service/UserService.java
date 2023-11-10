@@ -34,8 +34,8 @@ public class UserService {
     public ResponseDto signUp(SignupDto signupDto) {
         // check if user is already present
         if (Objects.nonNull(userRepository.findByEmail(signupDto.getEmail()))) {
-            // we have an user
-            throw new CustomException("user already present");
+        	ResponseDto responseDto = new ResponseDto("try again", "user already present");
+            return responseDto;
         }
 
 
