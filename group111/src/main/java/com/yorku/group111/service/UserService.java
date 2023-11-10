@@ -80,14 +80,14 @@ public class UserService {
         User user = userRepository.findByEmail(signInDto.getEmail());
 
         if (Objects.isNull(user)) {
-            throw new AuthenticationFailException("user is not valid");
+        	return new SigninResponseDto("User is not valid", null);
         }
 
         // hash the password
 
         try {
             if (!user.getPasswoprd().equals((signInDto.getPassword()))){ // change to hashed passwrod
-                throw new AuthenticationFailException("wrong password");
+            	return new SigninResponseDto("Wrong Password", null);
             }
         } catch (Exception e) { // change here to alogorithm excpetion
             e.printStackTrace();
