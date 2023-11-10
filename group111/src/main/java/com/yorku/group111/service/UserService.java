@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
+import com.yorku.group111.dto.ForgotPasswordResponseDto;
 import com.yorku.group111.dto.ResponseDto;
 import com.yorku.group111.dto.SigninDto;
 import com.yorku.group111.dto.SigninResponseDto;
@@ -86,7 +86,7 @@ public class UserService {
         // hash the password
 
         try {
-            if (!user.getPasswoprd().equals((signInDto.getPassword()))){ // change to hashed passwrod
+            if (!user.getPassword().equals((signInDto.getPassword()))){ // change to hashed passwrod
             	return new SigninResponseDto("Wrong Password", null);
             }
         } catch (Exception e) { // change here to alogorithm excpetion
@@ -109,4 +109,19 @@ public class UserService {
 
         // return response
     }
+
+	public ForgotPasswordResponseDto ForgotPassword(SigninDto sindto) {
+		User user = userRepository.findByEmail(sindto.getEmail());
+
+        if (Objects.isNull(user)) {
+        	return new ForgotPasswordResponseDto("User is not valid");
+        }
+
+        user.setPassword(sindto.getPassword());
+    	userRepository.save(user);
+
+        
+		return new ForgotPasswordResponseDto("Your password has been updated");
+		
+	}
 }

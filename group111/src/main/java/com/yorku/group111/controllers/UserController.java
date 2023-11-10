@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
+import com.yorku.group111.dto.ForgotPasswordResponseDto;
 import com.yorku.group111.dto.ResponseDto;
 import com.yorku.group111.dto.SigninDto;
 import com.yorku.group111.dto.SigninResponseDto;
@@ -39,5 +39,10 @@ public class UserController {
         return userService.signIn(signInDto);
     }
 
+    @PostMapping("/forgotpassword")
+    public ForgotPasswordResponseDto forgotPassword(@RequestBody SigninDto signInDto) {
+        return userService.ForgotPassword(signInDto);
+    }
+    
 
 }

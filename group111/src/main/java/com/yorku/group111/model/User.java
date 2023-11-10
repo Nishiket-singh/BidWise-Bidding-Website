@@ -74,12 +74,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswoprd() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPasswoprd(String passwoprd) {
-        this.password = passwoprd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getStreetaddress() {
@@ -124,6 +124,11 @@ public class User {
         this.city = city;
         this.country = country;
     }
+	
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
 
     public User() {
     }
