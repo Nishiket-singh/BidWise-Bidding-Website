@@ -13,7 +13,7 @@ import com.yorku.group111.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	@Query(value = "SELECT * FROM products p WHERE CONCAT(p.name, p.description) LIKE %?1%",nativeQuery = true)
+	@Query(value = "SELECT DISTINCT p.* FROM products p WHERE CONCAT(p.name,' ', p.description, ' ', p.auctiontype, ' ') LIKE %?1%",nativeQuery = true)
 	public List<Product> search(String keyword);
 	
 }	
