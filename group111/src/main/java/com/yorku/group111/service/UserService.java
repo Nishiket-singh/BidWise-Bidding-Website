@@ -3,8 +3,7 @@ package com.yorku.group111.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import com.yorku.group111.dto.SignupDto;
 import com.yorku.group111.exceptions.AuthenticationFailException;
 import com.yorku.group111.exceptions.CustomException;
 import com.yorku.group111.model.AuthenticationToken;
+import com.yorku.group111.model.Product;
 import com.yorku.group111.model.User;
 import com.yorku.group111.repository.UserRepository;
 
@@ -129,5 +129,10 @@ public class UserService {
 		ResponseDto responseDto = new ResponseDto("Try Again", "Empty fields are not allowed ");
 		return responseDto;
 		
+	}
+	
+	public Optional<User> GetUserById(Integer Id) {
+		Optional<User> user = userRepository.findById(Id);
+		return user;
 	}
 }

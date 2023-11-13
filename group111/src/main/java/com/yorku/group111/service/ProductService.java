@@ -13,6 +13,7 @@ import com.yorku.group111.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,12 @@ public class ProductService {
     public ResponseDto createProduct(Product product) {
     	productRepository.save(product);
     	return new ResponseDto("Success", "Added to products for auction");
+    }
+    
+    public Optional<Product> getProductById(Integer id) {
+    	Optional<Product> product = productRepository.findById(id);
+		return product;
+    	
     }
 
     
