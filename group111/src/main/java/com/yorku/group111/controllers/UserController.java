@@ -1,6 +1,7 @@
 package com.yorku.group111.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,8 @@ public class UserController {
 
     @PostMapping("/signin")
     public SigninResponseDto signIn(@RequestBody SigninDto signInDto) {
-        return userService.signIn(signInDto);
+    	return userService.signIn(signInDto);
+          	
     }
 
     @PostMapping("/forgotpassword")
