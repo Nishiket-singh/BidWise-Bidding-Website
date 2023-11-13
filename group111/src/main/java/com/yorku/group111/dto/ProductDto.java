@@ -29,12 +29,12 @@ public class ProductDto {
 		this.currentPrice = currentPrice;
 	}
 
-	public String getAuctionPrice() {
+	public String getAuctionType() {
 		return auctionType;
 	}
 
-	public void setAuctionPrice(String auctionPrice) {
-		this.auctionType = auctionPrice;
+	public void setAuctionType(String auctionType) {
+		this.auctionType = auctionType;
 	}
 
 	public String getRemaningTime() {

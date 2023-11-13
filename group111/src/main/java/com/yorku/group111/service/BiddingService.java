@@ -40,9 +40,11 @@ public class BiddingService {
 	
 	@Autowired
 	private ServletContext servletContext;
+	
+    @Autowired
+    ApplicationStartTime timer;
 
-	public BiddingDto getItemAndBiddingDetails() {
-		Integer productid =  (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
+	public BiddingDto getItemAndBiddingDetails(Integer productid) {
 		//Get product info using product repository.
 		Product product = productRepository.getReferenceById(productid); 
 		
@@ -67,11 +69,10 @@ public class BiddingService {
 	}
 	
 	
-	public SubmitBidDto submitForwardBid(Integer bidamount, String authorizationToken) {
-		Integer productid = (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
+	public SubmitBidDto submitForwardBid(Integer bidamount,Integer productid ,String authorizationToken) {
 		
 		authorizationToken = authorizationToken.split(" ")[1];
-		Integer userid = tokenRepository.findByToken(authorizationToken).getUser().getId(); // id of user who is making the bid
+		User user= tokenRepository.findByToken(authorizationToken).getUser(); // id of user who is making the bid
 		
 		// check if this is higher than bids for this item
 		HighestBid currentHighestBid = highestbidRepository.findByProduct(new Product(productid)); // will never be null
@@ -80,13 +81,13 @@ public class BiddingService {
 		Integer currentHighestBidAmount = currentHighestBid.getHighestbidamount();
 		if(bidamount > currentHighestBidAmount) {
 			// save the bid in bids table since this is an acceptable bid
-			Bid bid = new Bid(bidamount, new User(userid), new Product(productid)); 
+			Bid bid = new Bid(bidamount, user, new Product(productid)); 
 			bidRepository.save(bid);
 				
 			// update the highest bid table
 			currentHighestBid.setHighestbidamount(bidamount);
 			if(currentHighestBid.getUser() == null) { // first bid for this item
-				currentHighestBid.setUser(new User(userid));
+				currentHighestBid.setUser(user);
 			}
 			highestbidRepository.save(currentHighestBid);
 			return new SubmitBidDto("Success", currentHighestBid.getHighestbidamount(), currentHighestBid.getUser().getFirstName());
@@ -101,7 +102,11 @@ public class BiddingService {
 		
 	}
 	
-	public ResponseDto submitDutchBid(String authorizationToken ) {
+	public String getTimeRemaining() {
+	
+		return "time remaining";
+	}
+	public ResponseDto submitDutchBid(Integer productid,String authorizationToken ) {
 		authorizationToken = authorizationToken.split(" ")[1];
 		User user = tokenRepository.findByToken(authorizationToken).getUser();
 		servletContext.setAttribute("auctionwinnerid", user.getId());

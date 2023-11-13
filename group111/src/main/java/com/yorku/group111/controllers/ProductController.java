@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yorku.group111.dto.ProductDto;
+import com.yorku.group111.dto.ResponseDto;
+import com.yorku.group111.model.Product;
 import com.yorku.group111.service.ProductService;
 
 
-
+@RequestMapping("/products")
 @RestController
 public class ProductController {
 	
 	@Autowired
     ProductService productService;
 	
-	@GetMapping("/products")
+	@GetMapping("/allproducts")
 	public List<ProductDto> products() {
         return productService.getAllProducts();
     }
@@ -33,12 +35,17 @@ public class ProductController {
 	}
 	
 	@PostMapping("selectproduct")
-	public void selectProduct(@RequestBody Map<String, Integer> requestBody) {
+	public ResponseDto selectProduct(@RequestBody Map<String, Integer> requestBody) {
 		Integer productid = requestBody.get("productid");
 		
-		productService.selectProduct(productid);
+		return productService.selectProduct(productid);
 		
 		//return type of product acution type;
+	}
+	
+	@PostMapping("createproduct")
+	public ResponseDto createProduct(@RequestBody Product product) {
+		return productService.createProduct(product);
 	}
 	
 
