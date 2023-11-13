@@ -45,6 +45,12 @@ public class BiddingController {
 		
 	}
 	
+	@GetMapping("/endforwardbid")
+	public ResponseDto endForwardBid(@RequestBody Map<String, Integer> requestBody) {
+		Integer productid = requestBody.get("productid");
+		return biddingService.endForwardBid(productid);
+	}
+	
 	@GetMapping("/getTimeRemaining")
 	public String getTimeRemaining() {
 		
@@ -60,10 +66,10 @@ public class BiddingController {
 	}
 	
 	@GetMapping("/paynow")
-	public String payNow(@RequestBody Map<String, Boolean> requestBody,@RequestHeader("Authorization") String authorizationToken) {
-		Boolean expeditedShipment = requestBody.get("expediatedshipment");
-	
-		return biddingService.payNow(expeditedShipment,authorizationToken);
+	public ResponseDto payNow(@RequestBody Map<String, Integer> requestBody,@RequestHeader("Authorization") String authorizationToken) {
+		Integer expeditedShipment = requestBody.get("expediatedshipment");
+	    Integer productid = requestBody.get("productid");
+		return biddingService.payNow(productid,expeditedShipment,authorizationToken);
 	
 	}
 }

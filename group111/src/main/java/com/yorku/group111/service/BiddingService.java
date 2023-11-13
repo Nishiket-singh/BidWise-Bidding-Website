@@ -1,5 +1,9 @@
 package com.yorku.group111.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,9 +90,8 @@ public class BiddingService {
 				
 			// update the highest bid table
 			currentHighestBid.setHighestbidamount(bidamount);
-			if(currentHighestBid.getUser() == null) { // first bid for this item
-				currentHighestBid.setUser(user);
-			}
+			currentHighestBid.setUser(user);
+		
 			highestbidRepository.save(currentHighestBid);
 			return new SubmitBidDto("Success", currentHighestBid.getHighestbidamount(), currentHighestBid.getUser().getFirstName());
 		}
@@ -101,7 +104,21 @@ public class BiddingService {
 		}
 		
 	}
-	
+	public ResponseDto endForwardBid(Integer productid) {
+		User user = highestbidRepository.findByProduct(new Product(productid)).getUser();
+		if(servletContext.getAttribute("prodTowinner") == null) {
+			HashMap<Integer, Integer> prodToWinner = new HashMap<Integer, Integer>();
+			prodToWinner.put(productid, user.getId());
+			servletContext.setAttribute("prodTowinner", prodToWinner);
+		}
+		else {
+			HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
+			prodToWinner.put(productid, user.getId());
+			servletContext.setAttribute("prodTowinner", prodToWinner);
+		}
+		return new ResponseDto("Success", "Won by: " + user.getFirstName());
+		
+	}
 	public String getTimeRemaining() {
 	
 		return "time remaining";
@@ -109,20 +126,31 @@ public class BiddingService {
 	public ResponseDto submitDutchBid(Integer productid,String authorizationToken ) {
 		authorizationToken = authorizationToken.split(" ")[1];
 		User user = tokenRepository.findByToken(authorizationToken).getUser();
-		servletContext.setAttribute("auctionwinnerid", user.getId());
+		if(servletContext.getAttribute("prodTowinner") == null) {
+			HashMap<Integer, Integer> prodToWinner = new HashMap<Integer, Integer>();
+			prodToWinner.put(productid, user.getId());
+			servletContext.setAttribute("prodTowinner", prodToWinner);
+		}
+		else {
+			HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
+			prodToWinner.put(productid, user.getId());
+			servletContext.setAttribute("prodTowinner", prodToWinner);
+		
+		}
+		
 		return new ResponseDto("Success", "Won by: " + user.getFirstName());
 	}
 	
-	public String payNow(Boolean expediatedShipment,String authorizationToken) {
+	public ResponseDto payNow(Integer productid,Integer expediatedShipment,String authorizationToken) {
 		authorizationToken = authorizationToken.split(" ")[1];
 		// check if this is the user that won
-		Integer winnerId = (Integer) servletContext.getAttribute("auctionwinner");
+		HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
+		Integer winnerId = prodToWinner.get(productid);
 		String winnerToken = tokenRepository.findByUser(new User(winnerId)).getToken();
 		if(authorizationToken.equals(winnerToken)) {
-			httpsession.setAttribute("expediatedshipment", expediatedShipment);
-			return "you can pay";
+			return new ResponseDto("Success", "Procees with Payment");
 		}
-		return "You cant pay";
+		return new ResponseDto("Failed", "The item has been auctioned");
 	}
 	
 }
