@@ -31,8 +31,11 @@ public class ProductController {
 	@PostMapping("selectproduct")
 	public void selectProduct(@RequestBody Map<String, Integer> requestBody) {
 		Integer productid = requestBody.get("productid");
-		System.out.println(productid);
+		
 		productService.selectProduct(productid);
+		
+		//return type of product acution type;
 	}
+	
 
 }

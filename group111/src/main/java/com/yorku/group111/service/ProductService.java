@@ -52,6 +52,7 @@ public class ProductService {
         return productDtos;
     }
 
+    // here we should return the product auction type
     public void selectProduct(Integer productId) {
     	httpsession.setAttribute("productid", productId );
     }

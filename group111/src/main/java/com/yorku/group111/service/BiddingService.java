@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yorku.group111.dto.BiddingDto;
+import com.yorku.group111.dto.ResponseDto;
+import com.yorku.group111.dto.SubmitBidDto;
 import com.yorku.group111.model.Bid;
 import com.yorku.group111.model.HighestBid;
 import com.yorku.group111.model.Product;
@@ -13,6 +15,7 @@ import com.yorku.group111.repository.HighestBidRepository;
 import com.yorku.group111.repository.ProductRepository;
 import com.yorku.group111.repository.TokenRepository;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -35,26 +38,36 @@ public class BiddingService {
 	@Autowired
 	private HttpSession httpsession;
 	
-	public BiddingDto getItemAndForwardBiddingDetails() {
+	@Autowired
+	private ServletContext servletContext;
+
+	public BiddingDto getItemAndBiddingDetails() {
 		Integer productid =  (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
-		System.out.println(productid);
 		//Get product info using product repository.
 		Product product = productRepository.getReferenceById(productid); 
-		//Get highest bid info using highestbidRepo
-		HighestBid highestbid = highestbidRepository.findByProduct(product); // highest bid should never be null by our logic
 		
-		String highestBidderName = null;
-		if(highestbid.getUser() != null) {
-			highestBidderName = highestbid.getUser().getFirstName();
+		BiddingDto biddingDto;
+		//check for product bidding type
+		if(product.getAuctiontype().equals("Forward")){
+			//Get highest bid info using highestbidRepo
+			HighestBid highestbid = highestbidRepository.findByProduct(product); // highest bid should never be null by our logic
+			
+			String highestBidderName = null; // if first bid, user is null
+			if(highestbid.getUser() != null) {
+				highestBidderName = highestbid.getUser().getFirstName();
+			}
+			// 
+			biddingDto = new BiddingDto( product.getName(),product.getDescription(), product.getShippingtime(), highestbid.getHighestbidamount(), highestBidderName);
 		}
-		// 
-		BiddingDto biddingDto = new BiddingDto( product.getName(),product.getDescription(), product.getShippingtime(), highestbid.getHighestbidamount(), highestBidderName);
+		else {
+			biddingDto = new BiddingDto( product.getName(), product.getDescription(), product.getShippingtime(), Integer.valueOf(product.getInitialprice()), null);
+		}
 		
 		return biddingDto;
 	}
 	
 	
-	public String submitForwardBid(Integer bidamount, String authorizationToken) {
+	public SubmitBidDto submitForwardBid(Integer bidamount, String authorizationToken) {
 		Integer productid = (Integer) httpsession.getAttribute("productid"); // if not set using another command it will be null
 		
 		authorizationToken = authorizationToken.split(" ")[1];
@@ -76,26 +89,35 @@ public class BiddingService {
 				currentHighestBid.setUser(new User(userid));
 			}
 			highestbidRepository.save(currentHighestBid);
+			return new SubmitBidDto("Success", currentHighestBid.getHighestbidamount(), currentHighestBid.getUser().getFirstName());
 		}
 		else {
-			return "Enter a higher bid";
+			String highestBidderName = null; // if first bid, user is null
+			if(currentHighestBid.getUser() != null) {
+				highestBidderName = currentHighestBid.getUser().getFirstName();
+			}
+			return new SubmitBidDto("Failed", currentHighestBidAmount, highestBidderName); 
 		}
-	
-	
-		
-		return "Bid sumbitted";
 		
 	}
 	
-	public BiddingDto getItemAndDutchBiddingDetails() {
-		Integer productid = 2; // to come from catalogue controller selected by the user through httpSession
-		
-		//Get product info using product repository.
-		Product product = productRepository.getReferenceById(productid); // change this method when changing the spring version.deprecated probably 
-		
-		// change these to actual product info when product table fully implemented and price also comes from product table since dutch bidding
-		BiddingDto biddingDto = new BiddingDto( product.getName(), product.getDescription(), product.getShippingtime(), Integer.valueOf(product.getInitialprice()), null); 
-		
-		return biddingDto;
+	public ResponseDto submitDutchBid(String authorizationToken ) {
+		authorizationToken = authorizationToken.split(" ")[1];
+		User user = tokenRepository.findByToken(authorizationToken).getUser();
+		servletContext.setAttribute("auctionwinnerid", user.getId());
+		return new ResponseDto("Success", "Won by: " + user.getFirstName());
 	}
+	
+	public String payNow(Boolean expediatedShipment,String authorizationToken) {
+		authorizationToken = authorizationToken.split(" ")[1];
+		// check if this is the user that won
+		Integer winnerId = (Integer) servletContext.getAttribute("auctionwinner");
+		String winnerToken = tokenRepository.findByUser(new User(winnerId)).getToken();
+		if(authorizationToken.equals(winnerToken)) {
+			httpsession.setAttribute("expediatedshipment", expediatedShipment);
+			return "you can pay";
+		}
+		return "You cant pay";
+	}
+	
 }
