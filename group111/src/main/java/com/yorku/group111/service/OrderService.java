@@ -13,7 +13,7 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public Order createOrder(Product product, User user, String shippingInformation) {
+    public Order createOrder(Product product, User user) {
         Order order = new Order();
         order.setProduct(product);
         order.setUser(user);
