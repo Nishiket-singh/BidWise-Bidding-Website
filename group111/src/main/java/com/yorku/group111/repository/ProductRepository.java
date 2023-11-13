@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.yorku.group111.dto.ProductDto;
 import com.yorku.group111.model.Product;
 
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	@Query("SELECT p FROM Products p WHERE CONCAT(p.name, ' ', p.brand, ' ', p.madein, ' ', p.price) LIKE %?1%")
+	@Query(value = "SELECT * FROM products p WHERE CONCAT(p.name, p.description) LIKE %?1%",nativeQuery = true)
 	public List<Product> search(String keyword);
 	
 }	
