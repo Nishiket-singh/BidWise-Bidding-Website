@@ -80,14 +80,14 @@ public class UserService {
         User user = userRepository.findByEmail(signInDto.getEmail());
 
         if (Objects.isNull(user)) {
-        	return new SigninResponseDto("User is not valid", null);
+        	return new SigninResponseDto("Try Again", "User is not valid");
         }
 
         // hash the password
 
         try {
             if (!user.getPassword().equals((signInDto.getPassword()))){ // change to hashed passwrod
-            	return new SigninResponseDto("Wrong Password", null);
+            	return new SigninResponseDto("Try Again", "Wrong Password");
             }
         } catch (Exception e) { // change here to alogorithm excpetion
             e.printStackTrace();
@@ -122,6 +122,12 @@ public class UserService {
 
         
 		return new ForgotPasswordResponseDto("Your password has been updated");
+		
+	}
+	
+	public ResponseDto error() {
+		ResponseDto responseDto = new ResponseDto("Try Again", "Empty fields are not allowed ");
+		return responseDto;
 		
 	}
 }

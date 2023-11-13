@@ -1,9 +1,17 @@
 package com.yorku.group111.dto;
 
+import javax.validation.constraints.NotNull;
+
+
+
 public class SignupDto {
+	
+	@NotNull(message = "firstname shouldn't be null")
 	private String firstname;
     private String lastname;
+    @NotNull(message = "email shouldn't be null")
     private String email;
+    @NotNull(message = "password shouldn't be null")
     private String password;
     private String streetaddress;
     private String postalcode;

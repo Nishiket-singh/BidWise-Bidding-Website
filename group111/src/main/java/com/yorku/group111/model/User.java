@@ -1,5 +1,7 @@
 package com.yorku.group111.model;
 
+import org.springframework.lang.NonNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,30 +15,39 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull
     private Integer id;
 
-    @Column(name = "firstname")
+    @Column(name = "firstname",nullable = false)
+    @NonNull
     private String firstName;
 
-    @Column(name = "lastname")
+    @Column(name = "lastname",nullable = false)
+    @NonNull
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email",nullable = false, unique = true)
+    @NonNull
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
+    @NonNull
     private String password;
     
-    @Column(name = "streetaddress")
+    @Column(name = "streetaddress",nullable = false)
+    @NonNull
     private String streetaddress;
 
-    @Column(name = "postalcode")
+    @Column(name = "postalcode",nullable = false)
+    @NonNull
     private String postalcode;
     
-    @Column(name = "city")
+    @Column(name = "city",nullable = false)
+    @NonNull
     private String city;
     
-    @Column(name = "country")
+    @Column(name = "country",nullable = false)
+    @NonNull
     private String country;
     
     
