@@ -21,6 +21,9 @@ public class Product {
     @Column(name = "description")
     private String description;
     
+    @Column(name = "genre")
+    private String genre;
+    
     @Column(name = "initialprice")
     private int initialprice;
     
