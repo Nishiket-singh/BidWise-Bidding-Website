@@ -13,3 +13,13 @@ VALUES
 
 INSERT INTO HIGHESTBIDS(HIGHESTBIDAMOUNT, PRODUCTID)
 SELECT INITIALPRICE, ID FROM PRODUCTS;
+
+INSERT INTO USERS(FIRSTNAME,LASTNAME,EMAIL,PASSWORD,STREETADDRESS, POSTALCODE,CITY,COUNTRY)
+VALUES
+('Hashim', 'Khan', 'hashimak@gmail.com', 'khan', '215 blvd', 'm3n', 'toronto', 'canada'),
+('Nish', 'Singh', 'nishs@gmail.com', 'nish', '215 blvd', 'm3n', 'toronto', 'canada' );
+
+INSERT INTO TOKENS(TOKEN,CREATEDDATE,USERID)
+VALUES
+('b5eccb4c-2982-4d6d-807b-2270ecff6d25', '2023-11-13', 1),
+('ada7dbd4-18f0-4167-af7b-751f3bc5e706', '2023-11-13', 2);
