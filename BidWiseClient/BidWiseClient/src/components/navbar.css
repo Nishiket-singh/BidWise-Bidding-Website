@@ -1,0 +1,44 @@
+
+
+
+
+.navbar-container {
+    font-family: Arial;
+    text-align: center;
+    /* background-color:#6ca5a4; */
+    margin:00px;
+    padding: 0;
+    color:white;
+  }
+
+.nav-items {
+
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+    text-align: center;
+
+
+
+} 
+
+.navbar-container h1 {
+
+    font-size: 50px;
+    text-emphasis: rgb(155, 102, 102);
+    text-align: center;
+}
+
+.nav-links{
+    font-family: "Source Sans Pro", sans-serif;
+    border-radius: 3px;
+    font-size: 18px;
+
+
+
+}
+
+.navbar-logo{
+
+    padding-top: 100px;
+}
