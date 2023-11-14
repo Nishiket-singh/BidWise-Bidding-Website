@@ -12,3 +12,24 @@ Payment Test Cases: For each payment collection, Run the first command in the co
 Each Collection corresponds to a test case in The Payment Collection Test Case section of document.
 
 If you have to reboot the application after running it once, set "spring.sql.init.mode=always" to "spring.sql.init.mode=never" in src/main/resources/application.properties
+
+For Frontend:
+
+Open the terminal and navigate to the project directory.
+Run npm i to install the project dependencies.
+After successful installation, run npm start in the terminal.
+Open your web browser and go to http://localhost:3000.
+Project Structure
+
+Append the following paths to access each component:
+     1. "/": Home Page
+     2. "/SignUp": SignUp Page
+     3. "/SignIn": SignIn Page
+     4. "/Payment": Payment Page
+     5. "/ReceiptPage": Receipt Page   
+     6. "/AboutUs": About Us Page
+     7. "/ForwardAuction": Forward Auction Page
+     8. "/DutchAuction": Dutch Auction Page
+     9. "/Catalogue": Catalogue Page
+     10. "/BiddingEnd": Bidding End Page
+     11. "/NewProduct": New Product Page
