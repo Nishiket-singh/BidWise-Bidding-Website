@@ -8,7 +8,7 @@ Open your web browser and go to http://localhost:3000.
 Project Structure
 
 Append the following paths to access each component:
-     1. "/about": Home Page
+     1. "/": Home Page
      2. "/SignUp": SignUp Page
      3. "/SignIn": SignIn Page
      4. "/Payment": Payment Page
