@@ -6,20 +6,20 @@ Run npm i to install the project dependencies.
 After successful installation, run npm start in the terminal.
 Open your web browser and go to http://localhost:3000.
 Project Structure
-<Route  path="/" exact component={Home} />
-      <Route  path="/about" exact component={Home} />
-      <Route  path="/SignUp" exact component={SignUp} />
-      <Route  path="/SignIn" exact component={SignIn} />
-      <Route  path="/Payment" exact component={Payment} />
-      <Route path="/ReceiptPage" exact component={ReceiptPage}    />
-      <Route path="/AboutUs" exact component={AboutUs}    />
-      <Route path="/Contact" exact component={Contact}  />
 
+Append the following paths to access each component:
+     1. "/about": Home Page
+     2. "/SignUp": SignUp Page
+     3. "/SignIn": SignIn Page
+     4. "/Payment": Payment Page
+     5. "/ReceiptPage": Receipt Page   
+     6. "/AboutUs": About Us Page
+     7. "/ForwardAuction": Forward Auction Page
+     8. "/DutchAuction": Dutch Auction Page
+     9. "/Catalogue": Catalogue Page
+     10. "/BiddingEnd": Bidding End Page
+     11. "/NewProduct": New Product Page
+
+     
       
-
-      <Route path="/ForwardAuction" exact component={ForwardAuction} />
-      <Route path="/DutchAuction" exact component={DutchAuction} />
-      <Route path="/Catalogue" exact component={CatalogueS} />
-      <Route path="/BiddingEnd" exact component={BiddingEnd} />
-
-      <Route path="/NewProduct" exact component={Product} />
+     
