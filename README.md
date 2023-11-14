@@ -1,7 +1,8 @@
-1. Download zip file. The front end is in Bidwise Client package. Info for that is in that readme
-2. Extract it and import group111 package as a maven project in eclipse
-3. Run EcommerceprojectApplication.java as a Java Application
-4. Import the postman collections and run all the collections.
+1. Download zip file. 
+2. Extract it.
+3. Import group111 package as a maven project in eclipse to run the backend.The front end is in BidwiseClient package. Info for that is in that readme
+4. Run EcommerceprojectApplication.java as a Java Application
+5. Import the postman collections and run all the collections.
 
 For Testing:
 LoginCollection: Run it as a collection or reach request one by one in order and verify the responses. Each request corresponds to a test case described in the design document with first request corresponding to the first test case in Login Collection Test Cases section of the document.
