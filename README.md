@@ -1,5 +1,5 @@
-1. Download zip file
-2. Extract it and import it as a maven project in eclipse
+1. Download zip file. The front end is in Bidwise Client package. Info for that is in that readme
+2. Extract it and import group111 package as a maven project in eclipse
 3. Run EcommerceprojectApplication.java as a Java Application
 4. Import the postman collections and run all the collections.
 
