@@ -1,6 +1,6 @@
 1. Download zip file. 
 2. Extract it.
-3. Import group111 package as a maven project in eclipse to run the backend.The front end is in BidwiseClient package. Info for that is in that readme
+3. Import group111 package as a maven project in eclipse to run the backend.The front end is in BidwiseClient package. See at the bottom.
 4. Run EcommerceprojectApplication.java as a Java Application
 5. Import the postman collections and run all the collections.
 
@@ -25,15 +25,10 @@ Project Structure
 Append the following paths to access each component:
 
      1. "/": Home Page
-     
      2. "/SignUp": SignUp Page
-     
      3. "/SignIn": SignIn Page
-     
      4. "/Payment": Payment Page
-     
      5. "/ReceiptPage": Receipt Page  
-     
      6. "/AboutUs": About Us Page
      7. "/ForwardAuction": Forward Auction Page
      8. "/DutchAuction": Dutch Auction Page
