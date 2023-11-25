@@ -1,0 +1,47 @@
+.receiptInfo{
+
+    color:white;
+    font-size: 35px;
+    font-family: "Source Sans Pro", sans-serif;
+    display: flex;
+    justify-content:space-around;
+   
+
+
+    /* font-weight: 300; */
+}
+
+/* .listd{
+    display:flex;
+    align-items: center;
+
+
+} */
+
+
+/* 
+display:flex;
+justify-content: start;
+align-items: center;
+align-content:center; */
+
+.Home-button{
+
+    margin: 90px;
+}
+
+.listd h1{
+
+    font-size:6px;
+}
+.vl {
+    border-left: 6px solid rgb(134, 236, 217);
+    height: 700px;
+    margin-left: 230px;
+    margin-top:30px;
+  }
+
+.listd{
+    display:flex;
+    justify-content: center;
+}

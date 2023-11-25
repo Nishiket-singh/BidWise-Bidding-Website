@@ -1,0 +1,109 @@
+.mainContainercat{
+
+
+    padding: 50px;
+
+    margin:10px;
+   
+    margin-top: 50px;
+    margin-right: 30px;;
+    margin-bottom: 80px;;
+
+
+    display: flex;
+    justify-content:flex-end;
+    background-color: #50a3a2;
+
+}
+
+
+.forward_itemcat{
+
+    height: 200px;
+    width:240px;
+}
+
+
+.pcsccat{
+    margin-left:300px;
+    margin-right:140px;
+    font-size: 22px;
+
+
+
+}
+.hcsscat{
+
+    margin-top:0px;
+
+    margin-left:150px;
+}
+
+.biddscat{
+
+    margin-left: 150px;
+    margin-top: 300px;
+    padding-left:25px;
+    width: 100px;
+    
+
+  
+}
+
+.hkcat{
+
+    margin-left: 200px;
+}
+
+.radioo{
+
+    size: 10%;
+
+    height: 40px;
+    width:20px;
+
+}
+
+.PhotoAndHighBidInfocat{
+
+
+    height: 200px;;
+
+}
+
+.items{
+
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 100px;;
+    text-align: start;
+
+}
+
+
+
+.bidbut{
+
+
+    margin-top: 0px;
+
+}
+
+.elvis{
+
+
+    margin-left:370px;
+}
+
+.searchButton{
+
+    margin-top: 30px;;
+    margin-right: 80px;
+}
+
+.labelS{
+    margin-top: 30px;
+    margin-right: 60px;
+
+}

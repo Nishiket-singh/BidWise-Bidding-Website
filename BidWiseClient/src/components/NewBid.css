@@ -1,0 +1,93 @@
+.label,
+.required {
+  position: relative;
+  font-weight: 500;
+}
+.required {
+  color: var(--default-error-100);
+  display: none;
+}
+.label-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+.general-calendar {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: none;
+}
+.placeholder,
+.text {
+  position: relative;
+  line-height: 24px;
+}
+.text {
+  display: none;
+}
+.placeholder {
+  color: var(--neutral-30);
+}
+.general-calendar-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.frame-parent,
+.general-delete-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frame-parent {
+  align-self: stretch;
+  border-radius: var(--br-7xs);
+  background-color: var(--default-white);
+  box-shadow: var(--borders-text-input-field-border);
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-5xs) var(--padding-2xs);
+  color: var(--neutral-100);
+}
+.general-alert {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.something-went-wrong {
+  position: relative;
+  line-height: 24px;
+}
+.error-state-text,
+.helper-text {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: var(--default-body-small-size);
+}
+.error-state-text {
+  gap: var(--gap-7xs);
+  color: var(--default-error-100);
+}
+.helper-text {
+  color: var(--neutral-60);
+}
+.statedefault-labeltrue-req {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+  text-align: left;
+  font-size: var(--default-body-default-size);
+  color: var(--neutral-1001);
+  font-family: var(--default-body-small);
+}
