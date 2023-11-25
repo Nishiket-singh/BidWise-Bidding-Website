@@ -1,0 +1,19 @@
+.button {
+    position: relative;
+    font-weight: 500;
+  }
+  .typesecondary-sizelarge-ic {
+    border-radius: var(--br-7xs);
+    background-color: var(--neutral-10);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-sm) var(--padding-sm) var(--padding-sm)
+      var(--padding-lg);
+    text-align: left;
+    font-size: var(--default-buttons-default-size);
+    color: var(--neutral-100);
+    font-family: var(--default-buttons-default);
+  }
+  
