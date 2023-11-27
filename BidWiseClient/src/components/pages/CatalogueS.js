@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import "./CatalogueS.css"
 import axios from "axios"
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 
 
 function CatalogueS(){
@@ -16,13 +16,18 @@ function CatalogueS(){
 
     const[items, setItems]= useState([a,a,a,a]);
 
+    const [selectedItem, setSelectedItem]= useState({type:"",id:0});
+    const history = useHistory();
+
     useEffect(() => {
         const getProducts = async () => {
           try {
             
             const response = await axios.get("http://localhost:8080/products/allproducts");
             console.log(response.data);
+
             setItems(response.data);
+           
           } catch (error) {
             console.error("Error fetching data:", error);
           }
@@ -32,8 +37,27 @@ function CatalogueS(){
         getProducts();
       }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
     
+    function handleRadioClick(event){
+      let pid = event.target.id;
+      let atype=event.target.value;
+      console.log(atype);
+      console.log(pid);
+      setSelectedItem({type:atype, id:pid})
     
-    
+
+
+    }
+    function handleBidClick(){
+      selectedItem.type==="Forward" ? history.push({
+        pathname: '/ForwardAuction',
+        state: { productId: selectedItem.id },
+      }): history.push({
+        pathname: '/DutchAuction',
+        state: { productId: selectedItem.id },
+      });
+      
+
+    } 
 
     
 
@@ -44,40 +68,39 @@ function CatalogueS(){
 
 <input type="search" placeholder="Search for an item" className="searchButton"></input>
 
-
+{/* can remove index once api provide unique id for each product */}
 {items.map(item => (
     <div className="mainContainercat">  
-          <div key={item.id} className="PhotoAndHighBidInfocat">
-            <img className="forward_itemcat" alt="" src={item.image} />
+    {/* need to make change key={item.id} */}
+          <div key={item.id} className="PhotoAndHighBidInfocat">   
+            <img className="forward_itemcat" alt="" src={item.imageurl} />
             </div>
 
             <div className="ItemInfocat">
               <h1 className="hcsscat">{item.name}</h1>
               <div className="items">
                 <p>
-                  <strong>Price:</strong> {item.price}$
+                  <strong>Price:</strong> {item.currentPrice}$
                 </p>
                 <p>
                   <strong>Auction Type:</strong> {item.auctionType}
                 </p>
                 <p>
-                  <strong>Time Left:</strong> {item.timeLeft}
+                  <strong>Time Left:</strong> {item.remaningTime}
                 </p>
               </div>
             </div>
+  
+            <input onChange={handleRadioClick} id={item.id} value={item.auctionType} className="radioo" type="radio" />
 
-            <input className="radioo" type="radio" />
           </div>
          
         ))}
 
      
-    
+ <button className="bidbut"  onClick={handleBidClick}>Bid</button>
 
 
-
-
-   <Link  to="/BiddingEnd">  <button className="bidbut">Bid</button></Link>
 </div>
    
 
@@ -90,3 +113,5 @@ export default CatalogueS;
 
 
 
+
+{/* <Link  to="/ForwardAuction"> </Link> */}

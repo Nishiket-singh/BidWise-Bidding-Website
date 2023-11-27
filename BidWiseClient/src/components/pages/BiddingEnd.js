@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import "./BiddingEnd.css"
-import {Link} from "react-router-dom"
+import {Link,useLocation } from "react-router-dom"
 
 function BiddingEnd(){
 
@@ -14,6 +14,15 @@ function BiddingEnd(){
 
 
     });
+
+    const Location = useLocation();
+    const pid= Location.state.productId;
+    console.log(pid);
+
+
+
+
+
 
     return (  
 

@@ -7,10 +7,10 @@ function AboutUs() {
     <div className="Body-text">
       <p className="ptext">
         {" "}
+
         New updates`` from local machine.
 
         second update 
-        third update
         hehehehe Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Praesent sodales iaculis augue, ut aliquam leo imperdiet in. Donec
         ullamcorper, lorem quis sollicitudin interdum, lorem arcu dignissim
