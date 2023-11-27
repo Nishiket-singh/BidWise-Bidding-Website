@@ -15,6 +15,7 @@ function CatalogueS(){
    
 
     const[items, setItems]= useState([a,a,a,a]);
+    const [searchItem, setSearchItem]=useState();
 
     const [selectedItem, setSelectedItem]= useState({type:"",id:0});
     const history = useHistory();
@@ -48,25 +49,40 @@ function CatalogueS(){
 
     }
     function handleBidClick(){
+
+
+      
       selectedItem.type==="Forward" ? history.push({
         pathname: '/ForwardAuction',
-        state: { productId: selectedItem.id },
+        state: { productid: selectedItem.id },
+        authKey:'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
       }): history.push({
         pathname: '/DutchAuction',
-        state: { productId: selectedItem.id },
+        state: { productid: selectedItem.id },
+        authKey:'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
       });
       
 
     } 
+
+    function handleSearch(event){
+      let k=event.target.value;
+      console.log(k);
+      setSearchItem(k);
+      
+
+
+
+    }
 
     
 
     return (
        
 <div className="head">
+{/*  */}
 
-
-<input type="search" placeholder="Search for an item" className="searchButton"></input>
+<input name="searchbar" type="search" placeholder="Search for an item" onChange={handleSearch} value={searchItem} className="searchButton"></input>
 
 {/* can remove index once api provide unique id for each product */}
 {items.map(item => (
