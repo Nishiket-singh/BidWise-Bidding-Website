@@ -26,30 +26,23 @@ public class BiddingController {
 	@Autowired
 	private BiddingService biddingService;
 	
-//    @GetMapping("/productdetails")
-//    public BiddingDto getItemAndBiddingDetails(@RequestBody Map<String, Integer> requestBody) {
-//    	Integer productid = requestBody.get("productid");
-//    	BiddingDto response = biddingService.getItemAndBiddingDetails(productid);
-//    	return response;
-//    }
 	
 	@GetMapping("/productdetails")
 	public BiddingDto getItemAndBiddingDetails(@RequestParam("productid") Integer productId) {
 	    BiddingDto response = biddingService.getItemAndBiddingDetails(productId);
 	    return response;
 	}
-
+	
+	
 	@PostMapping("/forwardbid")
-	public SubmitBidDto submitForwardBid(@RequestBody Map<String, Integer> requestBody, @RequestHeader("Authorization") String authorizationToken) {
+	public SubmitBidDto submitForwardBid(@RequestParam("productid") Integer productId, @RequestParam("bidAmount") Integer bidAmount,@RequestHeader("Authorization") String authorizationToken) {
 		
 		//use users header info that contains authentication token
-		Integer productid = requestBody.get("productid");
-		if(requestBody.get("bidamount") == null) {
+		if(bidAmount == null) {
 			return new SubmitBidDto("Enter a bid Amount", null, null);
 		}
-		Integer bidamount = requestBody.get("bidamount");
-		
-		return biddingService.submitForwardBid(bidamount,productid,authorizationToken);
+
+		return biddingService.submitForwardBid(bidAmount,productId,authorizationToken);
 		
 	}
 	
@@ -66,18 +59,15 @@ public class BiddingController {
 	}
 	
 	@PostMapping("/dutchbid")
-	public ResponseDto submitDutchBid(@RequestBody Map<String, Integer> requestBody,@RequestHeader("Authorization") String authorizationToken) {
+	public ResponseDto submitDutchBid(@RequestParam("productid") Integer productId,@RequestHeader("Authorization") String authorizationToken) {
 		// Item has to be deleted after this bid, 
 		// store the winner's autharization token
-		Integer productid = requestBody.get("productid");
-		return biddingService.submitDutchBid(productid,authorizationToken);
+		return biddingService.submitDutchBid(productId,authorizationToken);
 	}
 	
 	@GetMapping("/paynow")
-	public ResponseDto payNow(@RequestBody Map<String, Integer> requestBody,@RequestHeader("Authorization") String authorizationToken) {
-		Integer expeditedShipment = requestBody.get("expediatedshipment");
-	    Integer productid = requestBody.get("productid");
-		return biddingService.payNow(productid,expeditedShipment,authorizationToken);
+	public ResponseDto payNow(@RequestParam("productid") Integer productId,@RequestParam("expediatedShipment") Integer expediatedShipment,@RequestHeader("Authorization") String authorizationToken) {
+		return biddingService.payNow(productId,expediatedShipment,authorizationToken);
 	
 	}
 }
