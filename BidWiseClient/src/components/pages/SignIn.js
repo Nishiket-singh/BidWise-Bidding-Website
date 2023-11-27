@@ -1,25 +1,61 @@
-import React, {useState} from 'react'
-// import axios from "axios"
+import React, {useState, useEffect} from 'react'
+import axios from "axios"
 import "./SignIn.css"
 import {Link} from "react-router-dom"
 
 function SignIn(){
 
-    const [form,setForm]= useState({
-        name:'',
-        password:'',
-    });
+    // const [form,setForm]= useState({
+    //     name:'',
+    //     password:'',
+    // });
+
+    const [name, setName]= useState("");
+    const [password, setPassword]= useState("");
 
 
-    function handleChange(e){
-        const [name, value]= e.target;
-        setForm({...form, [name]:value});
+    function handleNameChange(e){
+        const k= e.target.value;
+        console.log(k);
+        setName(k);
+        
+
+    }
+
+    function handlePassChange(e){
+        const k= e.target.value;
+        console.log(k);
+        setPassword(k);
+
 
     }
     function handleSignIn(){
 
         return 0;
     }
+
+
+    useEffect(() => {
+        const verify = async () => {
+          try {
+            
+            const response = await axios.post("http://localhost:8080/user/signin", {email:name, password:password });
+            console.log(response.data);
+            // setItems(response.data);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        };
+    
+        // Call the async function
+        verify();
+      }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+    
+    
+
+
+
+    
 
 
 
@@ -29,9 +65,9 @@ function SignIn(){
     <h1 >Sign In</h1>
     <form onSubmit={handleSignIn}>
    
-    <input name="name" type="text" placeholder='Enter Name' value={form.name} onChange={handleChange}></input>
+    <input name="name" type="text" placeholder='Enter Name' value={name} onChange={handleNameChange}></input>
     
-    <input name="password" type="password" placeholder='Enter Password' value={form.password} onChange={handleChange}></input>
+    <input name="password" type="password" placeholder='Enter Password' value={password} onChange={handlePassChange}></input>
    <Link  exact to="/Catalogue"><button type="submit"> Sign In</button>  </Link>
 
 
