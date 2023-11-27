@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yorku.group111.dto.BiddingDto;
@@ -25,12 +26,18 @@ public class BiddingController {
 	@Autowired
 	private BiddingService biddingService;
 	
-    @GetMapping("/productdetails")
-    public BiddingDto getItemAndBiddingDetails(@RequestBody Map<String, Integer> requestBody) {
-    	Integer productid = requestBody.get("productid");
-    	BiddingDto response = biddingService.getItemAndBiddingDetails(productid);
-    	return response;
-    }
+//    @GetMapping("/productdetails")
+//    public BiddingDto getItemAndBiddingDetails(@RequestBody Map<String, Integer> requestBody) {
+//    	Integer productid = requestBody.get("productid");
+//    	BiddingDto response = biddingService.getItemAndBiddingDetails(productid);
+//    	return response;
+//    }
+	
+	@GetMapping("/productdetails")
+	public BiddingDto getItemAndBiddingDetails(@RequestParam("productid") Integer productId) {
+	    BiddingDto response = biddingService.getItemAndBiddingDetails(productId);
+	    return response;
+	}
 
 	@PostMapping("/forwardbid")
 	public SubmitBidDto submitForwardBid(@RequestBody Map<String, Integer> requestBody, @RequestHeader("Authorization") String authorizationToken) {
