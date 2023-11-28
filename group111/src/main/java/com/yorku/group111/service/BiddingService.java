@@ -1,8 +1,8 @@
 package com.yorku.group111.service;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import com.yorku.group111.repository.ProductRepository;
 import com.yorku.group111.repository.TokenRepository;
 
 import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpSession;
+
 
 
 
@@ -39,8 +39,6 @@ public class BiddingService {
 	@Autowired
 	private HighestBidRepository highestbidRepository;
 	
-	@Autowired
-	private HttpSession httpsession;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -105,7 +103,10 @@ public class BiddingService {
 		
 	}
 	public ResponseDto endForwardBid(Integer productid) {
-		User user = highestbidRepository.findByProduct(new Product(productid)).getUser();
+		HighestBid highestBid = highestbidRepository.findByProduct(new Product(productid));
+		User user = highestBid.getUser();
+		Integer shippingPrice = Integer.parseInt(productRepository.getReferenceById(productid).getShippingtime());
+		Integer total = highestBid.getHighestbidamount() + shippingPrice;
 		if(servletContext.getAttribute("prodTowinner") == null) {
 			HashMap<Integer, Integer> prodToWinner = new HashMap<Integer, Integer>();
 			prodToWinner.put(productid, user.getId());
@@ -116,6 +117,7 @@ public class BiddingService {
 			prodToWinner.put(productid, user.getId());
 			servletContext.setAttribute("prodTowinner", prodToWinner);
 		}
+		servletContext.setAttribute("total", total);
 		return new ResponseDto("Success", "Won by: " + user.getFirstName());
 		
 	}
@@ -126,6 +128,8 @@ public class BiddingService {
 	public ResponseDto submitDutchBid(Integer productid,String authorizationToken ) {
 		authorizationToken = authorizationToken.split(" ")[1];
 		User user = tokenRepository.findByToken(authorizationToken).getUser();
+		Product prod = productRepository.getReferenceById(productid);
+		Integer total = prod.getInitialprice() + Integer.parseInt(prod.getShippingtime());
 		if(servletContext.getAttribute("prodTowinner") == null) {
 			HashMap<Integer, Integer> prodToWinner = new HashMap<Integer, Integer>();
 			prodToWinner.put(productid, user.getId());
@@ -137,7 +141,7 @@ public class BiddingService {
 			servletContext.setAttribute("prodTowinner", prodToWinner);
 		
 		}
-		
+		servletContext.setAttribute("total", total);
 		return new ResponseDto("Success", "Won by: " + user.getFirstName());
 	}
 	
@@ -147,6 +151,8 @@ public class BiddingService {
 		HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
 		Integer winnerId = prodToWinner.get(productid);
 		String winnerToken = tokenRepository.findByUser(new User(winnerId)).getToken();
+		
+		servletContext.setAttribute("expdetiatedshipment", expediatedShipment);
 		if(authorizationToken.equals(winnerToken)) {
 			return new ResponseDto("Success", "Procees with Payment");
 		}

@@ -25,19 +25,18 @@ public class PaymentService {
 	@Autowired
 	private ServletContext servletContext;
 	
-	@Autowired
-	private HttpSession httpsession;
 	
 	@Autowired
 	private UserRepository userRepository;
 	
 	
-	public PaymentDetailsDto getUserDetails() {
-		Integer winnerid = (Integer) servletContext.getAttribute("auctionwinner");
-		User user = userRepository.getReferenceById(winnerid);
-		Boolean expediatedShipment = (Boolean) httpsession.getAttribute("expediatedshipment");
-		Integer total = 100; // should be buying price
-		if(expediatedShipment) {
+	public PaymentDetailsDto getUserDetails(Integer productid) {
+		HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
+		Integer winnerId = prodToWinner.get(productid);
+		User user = userRepository.getReferenceById(winnerId);
+		Integer expediatedShipment = (Integer) servletContext.getAttribute("expdetiatedshipment");
+		Integer total = (Integer) servletContext.getAttribute("total"); 
+		if(expediatedShipment == 1) {
 			total = total + 10;
 		}
 		PaymentDetailsDto paymentDetails = new PaymentDetailsDto(user.getFirstName(), user.getLastName(), 
