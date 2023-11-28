@@ -12,14 +12,6 @@ import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe("pk_test_A7jK4iCYHL045qgjjfzAfPxu");
 
 function Payment() {
-  const options = {
-    mode: "payment",
-    amount: 1099,
-    currency: "usd",
-    paymentMethodCreation: "manual",
-    // Fully customizable with appearance API.
-    appearance: { theme: "night", labels: "floating" },
-  };
   const [winner, setWinner] = useState({
     firstname: "",
     lastname: "",
@@ -31,7 +23,6 @@ function Payment() {
   });
   const Location = useLocation();
   const pid = Location.state.productid;
-  const authKey = String(Location.authKey);
 
   useEffect(() => {
     const getUserDetails = async () => {
@@ -40,8 +31,8 @@ function Payment() {
           `http://localhost:8080/payment/userdetails?productid=${pid}`
         );
         console.log(response.data);
-
         setWinner(response.data);
+        setAmount(winner.total);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -50,6 +41,17 @@ function Payment() {
     // Call the async function
     getUserDetails();
   }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+
+  const [amount, setAmount] = React.useState();
+
+  const options = {
+    mode: "payment",
+    amount: 1099,
+    currency: "usd",
+    paymentMethodCreation: "manual",
+    // Fully customizable with appearance API.
+    appearance: { theme: "night", labels: "floating" },
+  };
 
   return (
     <div className="base">

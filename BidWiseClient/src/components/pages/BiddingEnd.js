@@ -58,7 +58,6 @@ function BiddingEnd() {
         }
       );
       console.log(response2.data);
-
       if (response2.data.status == "Success") {
         history.push({
           pathname: "/Payment",
