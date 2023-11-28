@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import "./SignIn.css"
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 
 function SignIn(){
 
@@ -29,31 +29,48 @@ function SignIn(){
 
 
     }
-    function handleSignIn(){
+  
 
-        return 0;
-    }
-
-
-    useEffect(() => {
-        const verify = async () => {
-          try {
+    // useEffect(() => {
+    //     const verify = async () => {
+    //       try {
             
-            const response = await axios.post("http://localhost:8080/user/signin", {email:name, password:password });
-            console.log(response.data);
-            // setItems(response.data);
-          } catch (error) {
-            console.error("Error fetching data:", error);
-          }
-        };
+    //         const response = await axios.post("http://localhost:8080/user/signin", {email:name, password:password });
+    //         console.log(response.data);
+    //         // setItems(response.data);
+    //       } catch (error) {
+    //         console.error("Error fetching data:", error);
+    //       }
+    //     };
     
-        // Call the async function
+    //     // Call the async function
+    //     verify();
+    //   }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+    
+
+
+    const verify = async () => {
+      try {
+    const response =  await axios.post("http://localhost:8080/user/signin", {email:name, password:password });
+    console.log(response.data);
+    
+  } catch (error) {
+
+    console.error("Error fetching data:", error);
+  }
+  };
+    
+
+      function handleSignIn(e){
+        e.preventDefault();
+        console.log(e.target);
+        console.log("I got clicked");
         verify();
-      }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
-    
-    
-
-
+        
+           
+        
+      }
+     
 
     
 
@@ -68,7 +85,7 @@ function SignIn(){
     <input name="name" type="text" placeholder='Enter Name' value={name} onChange={handleNameChange}></input>
     
     <input name="password" type="password" placeholder='Enter Password' value={password} onChange={handlePassChange}></input>
-   <Link  exact to="/Catalogue"><button type="submit"> Sign In</button>  </Link>
+  <button type="submit"> Sign In</button> 
 
 
     </form>
@@ -88,3 +105,5 @@ function SignIn(){
 
 
 export default SignIn;
+
+//<Link  exact to="/Catalogue">  </Link>

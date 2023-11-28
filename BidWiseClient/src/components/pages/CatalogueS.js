@@ -51,15 +51,18 @@ function CatalogueS(){
     function handleBidClick(){
 
 
-      
+
       selectedItem.type==="Forward" ? history.push({
         pathname: '/ForwardAuction',
         state: { productid: selectedItem.id },
-        authKey:'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
+        authKey: 'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
+        //'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
       }): history.push({
         pathname: '/DutchAuction',
         state: { productid: selectedItem.id },
         authKey:'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
+        // 'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
+        // 'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
       });
       
 

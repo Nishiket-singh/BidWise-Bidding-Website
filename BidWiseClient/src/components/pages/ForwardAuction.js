@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import "./ForwardAuction.css"
 
 function ForwardAuction(){
@@ -20,14 +20,19 @@ function ForwardAuction(){
 
     })
 
+    const[price, setPrice]=useState();
+
 
 
     const Location = useLocation();
+    const history = useHistory();
     // pid from the auction page, use this when making the API call
     let pid = Location.state.productid;
     pid = parseInt(pid);
     console.log(pid);
     console.log(typeof(pid));
+    const authKey=String(Location.authKey);
+    console.log(authKey);
     
     useEffect(() => {
       const getProducts = async () => {
@@ -43,7 +48,71 @@ function ForwardAuction(){
       getProducts();
     }, [pid]);
 
+    function handlePrice(event){
+      let p= event.target.value;
+      console.log(p);
+      setPrice(p);
+
+
+    }
+
+
+
+    const verify = async () => {
+      console.log(authKey);
+      try {
+    const response2 =  await axios.post(`http://localhost:8080/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,{}, {
+      headers: {
+        Authorization: `Bearer ${authKey}`, // Include the token in the Authorization header
+      },
+    }
+    );
+    console.log(response2.data);
+
+    if (response2.data.status=='Failed'){
+      alert("Wrong input!Fuck Off")
+        
+    }
+    setAuctionInfo((prevValues)=>{
+
+      return {...prevValues,
+        currentprice:response2.data.currentprice,
+        highestbidder:response2.data.highestbidder,
+
+           
+      }
+
+      
+    })
+
     
+    
+
+
+
+  } catch (error) {
+
+    console.error("Error fetching data:", error);
+  }
+  };
+
+
+  function handleBid(){
+    console.log("place bid clicked")
+  verify();
+
+  // history.push({
+  //   pathname: '/BiddingEnd',
+  //   state: { productid: pid },
+  //   authKey:authKey
+
+  // })
+  
+
+
+
+
+  }
 
 
     return (  <div className="mainContainer">  
@@ -66,8 +135,8 @@ function ForwardAuction(){
 
 <div className="bidds"> 
 
-<input type="text"  placeholder="Enter the price"></input>
-<button style={{marginTop:"0px"}}>Place A Bid</button>
+<input type="text" value={price} onChange={handlePrice} placeholder="Enter the price"></input>
+<button onClick={handleBid} style={{marginTop:"0px"}}>Place A Bid</button>
 
 
 

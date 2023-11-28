@@ -48,7 +48,7 @@ function DutchAuction() {
     const verify = async () => {
       console.log(authKey);
       try {
-    const response2 =  await axios.post("http://localhost:8080/bidding/dutchbid",{}, {
+    const response2 =  await axios.post(`http://localhost:8080/bidding/dutchbid?productid=${pid}`,{}, {
       headers: {
         Authorization: `Bearer ${authKey}`, // Include the token in the Authorization header
       },
@@ -74,11 +74,12 @@ function handleBidClick(e){
 
       
   
-    // history.push({
-    //     pathname: '/BiddingEnd',
-    //     state: { productid: pid },
+    history.push({
+        pathname: '/BiddingEnd',
+        state: { productid: pid },
+        authKey:authKey,
 
-    //   })
+      })
       
 
     

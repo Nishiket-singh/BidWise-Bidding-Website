@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios";
 import "./BiddingEnd.css"
-import {Link,useLocation } from "react-router-dom"
+import {Link,useLocation, useHistory } from "react-router-dom"
 
 function BiddingEnd(){
 
@@ -16,9 +16,15 @@ function BiddingEnd(){
 
     });
 
+    const [rad,setRadio]=useState(0);
+
     const Location = useLocation();
+    const history = useHistory();
     const pid= Location.state.productid;
+    const authKey=String(Location.authKey);
     console.log(pid);
+    console.log(authKey);
+
 
 
     useEffect(() => {
@@ -39,7 +45,63 @@ function BiddingEnd(){
         getItem();
       }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
+      function handleExpShip(){
+        setRadio(1);
+        console.log(rad);
 
+      }
+
+      const verify = async () => {
+        //console.log(authKey);
+        try {
+      const response2 =  await axios.get(`http://localhost:8080/bidding/paynow?productid=${pid}&expediatedShipment=${rad}`, {
+        headers: {
+          Authorization: `Bearer ${authKey}`, // Include the token in the Authorization header
+        },
+      }
+      );
+      console.log(response2.data);
+
+      if (response2.data.status=='Success'){
+
+        history.push({
+          pathname: '/Payment',
+          state: { productid: pid },
+          authKey:authKey,
+          
+        })
+
+      }
+      else{
+        alert("BITCH YOU DINT BUY THIS!!")
+      }
+
+
+
+
+      
+    } catch (error) {
+  
+      console.error("Error fetching data:", error);
+    }
+    };
+
+
+
+      function handlePay(e){
+
+        console.log(e.target);
+        console.log("I got clicked");
+        verify();
+
+
+
+
+        
+
+
+
+      }
 
 
 
@@ -80,13 +142,13 @@ function BiddingEnd(){
 
 
 
-<Link exact to="Payment"> <button className="biddsbid"  style={{marginTop:"0px"}}>Pay Now</button> </Link>
+ <button className="biddsbid" onClick={handlePay}  style={{marginTop:"0px"}}>Pay Now</button> 
 
 
-
+ {/* <Link exact to="Payment"></Link> */}
 
 </div>
- <input className="radis" type='radio'></input>   
+ <input className="radis" value={rad} onChange={handleExpShip} type='radio'></input>   
     
     </div>
 
