@@ -1,18 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ReceiptPage.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ReceiptPage() {
-  const [winner, setWinner] = useState({
-    fName: "Jack",
-    lName: "Ryan",
-    address: "31 Provost Drive",
-    province: "ON",
-    country: "Canada",
-    postalCode: "M2J6F4",
-    totalPaid: 799,
-    itemId: "AB9724",
+  const [receipt, setReceipt] = useState({
+    firstname: "",
+    lastname: "",
+    streetaddress: "",
+    city: "",
+    country: "",
+    postalcode: "",
+    total: 0,
+    productname: "",
   });
+
+  useEffect(() => {
+    const getReceipt = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/payment/receiptdetails`
+        );
+        console.log(response.data);
+        setReceipt(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the async function
+    getReceipt();
+  }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
   return (
     <div className="receiptInfo">
@@ -21,28 +39,28 @@ function ReceiptPage() {
           <h1>Receipt</h1>
 
           <li>
-            <strong>First Name : </strong> {winner.fName}{" "}
+            <strong>First Name : </strong> {receipt.firstname}{" "}
           </li>
           <li>
-            <strong>Last Name: </strong> {winner.lName}{" "}
+            <strong>Last Name: </strong> {receipt.lastname}{" "}
           </li>
           <li>
-            <strong>Address: </strong> {winner.address}{" "}
+            <strong>Address: </strong> {receipt.streetaddress}{" "}
           </li>
           <li>
-            <strong> Province: </strong> {winner.province}{" "}
+            <strong> City: </strong> {receipt.city}{" "}
           </li>
           <li>
-            <strong> Country: </strong> {winner.country}{" "}
+            <strong> Country: </strong> {receipt.country}{" "}
           </li>
           <li>
-            <strong> Postal Code: </strong> {winner.postalCode}{" "}
+            <strong> Postal Code: </strong> {receipt.postalcode}{" "}
           </li>
           <li>
-            <strong> Total Paid: </strong> {winner.totalPaid} ${" "}
+            <strong> Total Paid: </strong> ${receipt.total}{" "}
           </li>
           <li>
-            <strong> Item Id: </strong> {winner.itemId}{" "}
+            <strong> Product Name: </strong> {receipt.productname}{" "}
           </li>
         </ul>
       </div>

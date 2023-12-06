@@ -4,12 +4,11 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
 import "./Payment.css";
-
 import CheckoutForm from "./CheckoutForm";
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe("pk_test_A7jK4iCYHL045qgjjfzAfPxu");
+const stripePromise = loadStripe(
+  "pk_test_51O1GMmFqdp61aXeqvkFPF8U1hIkjMCEPAQ1zo2Z4ffcoqB6riMj9qgrBuptvYJ5E5LpheGXl9s6CBdGaStOgVqiC00f3RZg6Dn"
+);
 
 function Payment() {
   const [winner, setWinner] = useState({
@@ -21,6 +20,7 @@ function Payment() {
     country: "",
     total: 0,
   });
+  const [amount, setAmount] = useState(1099);
   const Location = useLocation();
   const pid = Location.state.productid;
 
@@ -32,7 +32,7 @@ function Payment() {
         );
         console.log(response.data);
         setWinner(response.data);
-        setAmount(winner.total);
+        setAmount(response.data.total * 100);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -42,13 +42,10 @@ function Payment() {
     getUserDetails();
   }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
-  const [amount, setAmount] = React.useState();
-
   const options = {
     mode: "payment",
-    amount: 1099,
-    currency: "usd",
-    paymentMethodCreation: "manual",
+    amount,
+    currency: "cad",
     // Fully customizable with appearance API.
     appearance: { theme: "night", labels: "floating" },
   };
