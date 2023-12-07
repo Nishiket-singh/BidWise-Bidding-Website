@@ -6,3 +6,5 @@ FROM openjdk:17
 COPY --from=build /home/app/target/group111-0.0.1-SNAPSHOT.jar /usr/src/myapp/demo.jar
 EXPOSE 5000
 ENTRYPOINT ["java","-jar","/usr/src/myapp/demo.jar"]
+
+

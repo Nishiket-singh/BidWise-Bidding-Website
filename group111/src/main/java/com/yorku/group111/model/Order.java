@@ -2,7 +2,6 @@ package com.yorku.group111.model;
 
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "userid")
@@ -27,6 +26,9 @@ public class Order {
     @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "productid")
     private Product product;
+    
+    @Column(name = "total",nullable = false)
+    private Integer total;
 
 
     // Constructors, getters, and setters
@@ -44,18 +46,27 @@ public class Order {
     	return product;
     }
     
-    public User setUser() {
+    public User getUser() {
     	return user;
     }
     
 
-    public Order() {
+    public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	public Order() {
         
     }
 
-    public Order(Product product, User user) {
+    public Order(Product product, User user, Integer total) {
         this.product = product;
         this.user = user;
+        this.total = total;
     }
     
 }

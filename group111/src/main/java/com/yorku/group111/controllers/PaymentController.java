@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.yorku.group111.dto.PaymentDetailsDto;
+import com.yorku.group111.dto.ReceiptDto;
 import com.yorku.group111.dto.ResponseDto;
 import com.yorku.group111.service.PaymentService;
 
@@ -35,16 +36,19 @@ public class PaymentController {
 	
 
     @PostMapping("/makepayment")
-    public ResponseDto createPaymentIntent(@RequestBody Map<String, String> requestBody) {
-        try {
-        	//can create a reqeuest body dto as well
-        	String paymentMethodId = requestBody.get("paymentMethodId");
-        	Integer amount = 2000; // use actual amount obtained from previous use case
-            PaymentIntent intent = paymentService.createPaymentIntent(amount, paymentMethodId, "http://localhost:8080/receipt");
-            return new ResponseDto("Success", "Payment Made");
+    public ResponseDto createPaymentIntent() {
+        try {	
+            PaymentIntent intent = paymentService.createPaymentIntent();
+            return new ResponseDto("Success", intent.getClientSecret());
         } catch (StripeException e) {
             return new ResponseDto("Failed", e.getMessage());
         }
+    }
+    
+    @GetMapping("/receiptdetails")
+    public ReceiptDto createReceipt() {
+    	
+    	return paymentService.createOrder();
     }
 
 }
