@@ -4,6 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.yorku.group111.model.Order;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
-    // Define custom queries here
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 }

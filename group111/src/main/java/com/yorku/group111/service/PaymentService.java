@@ -10,7 +10,12 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.yorku.group111.dto.PaymentDetailsDto;
+import com.yorku.group111.dto.ReceiptDto;
+import com.yorku.group111.model.Order;
+import com.yorku.group111.model.Product;
 import com.yorku.group111.model.User;
+import com.yorku.group111.repository.OrderRepository;
+import com.yorku.group111.repository.ProductRepository;
 import com.yorku.group111.repository.UserRepository;
 
 import jakarta.servlet.ServletContext;
@@ -29,13 +34,23 @@ public class PaymentService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private ProductRepository productRepository;
 	
-	public PaymentDetailsDto getUserDetails(Integer productid) {
+	@Autowired
+	private OrderRepository orderRepository;
+	
+	private Integer winnerId;
+	private Integer productId;
+	private Integer total;
+	
+	public PaymentDetailsDto getUserDetails(Integer productId) {
+		this.productId = productId;
 		HashMap<Integer, Integer> prodToWinner = (HashMap<Integer, Integer>) servletContext.getAttribute("prodTowinner");
-		Integer winnerId = prodToWinner.get(productid);
+		winnerId = prodToWinner.get(productId);
 		User user = userRepository.getReferenceById(winnerId);
 		Integer expediatedShipment = (Integer) servletContext.getAttribute("expdetiatedshipment");
-		Integer total = (Integer) servletContext.getAttribute("total"); 
+		total = (Integer) servletContext.getAttribute("total"); 
 		if(expediatedShipment == 1) {
 			total = total + 10;
 		}
@@ -44,18 +59,24 @@ public class PaymentService {
 		return paymentDetails;	
 	}
 	
-	public PaymentIntent createPaymentIntent(Integer amount, String paymentMethodId,String returnURL) throws StripeException {
+	public PaymentIntent createPaymentIntent() throws StripeException {
 		Stripe.apiKey = stripeApiKey;
 		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("amount", amount);
+		params.put("amount", total * 100);
         params.put("currency", "cad");
-        params.put("confirm", "true");
-        params.put("payment_method",paymentMethodId);
-        params.put("return_url", returnURL);
 		PaymentIntent intent = PaymentIntent.create(params);
 		
 		
 		return intent;
+	}
+	
+	public ReceiptDto createOrder() {
+		Order order = new Order(new Product(productId), new User(winnerId), total);
+		orderRepository.save(order);
+		User user = userRepository.getReferenceById(winnerId);
+		Product product = productRepository.getReferenceById(productId);
+		
+		return new ReceiptDto(user.getFirstName(), user.getLastName(), user.getStreetaddress(), user.getPostalcode(), user.getCity(), user.getCountry(), total, product.getName());
 	}
 
 }
