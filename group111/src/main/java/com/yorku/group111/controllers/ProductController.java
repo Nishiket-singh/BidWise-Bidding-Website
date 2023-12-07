@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yorku.group111.dto.ProductDto;
@@ -30,11 +31,17 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+//	@GetMapping("/searchproducts")
+//	public List<ProductDto> searchProducts(@RequestBody Map<String, String> requestBody){
+//		String keyword = requestBody.get("keyword");
+//		return productService.getSearchProducts(keyword);
+//	}
+	
 	@GetMapping("/searchproducts")
-	public List<ProductDto> searchProducts(@RequestBody Map<String, String> requestBody){
-		String keyword = requestBody.get("keyword");
-		return productService.getSearchProducts(keyword);
+	public List<ProductDto> searchProducts(@RequestParam String keyword){
+	    return productService.getSearchProducts(keyword);
 	}
+
 	
 	@PostMapping("selectproduct")
 	public ResponseDto selectProduct(@RequestBody Map<String, Integer> requestBody) {
