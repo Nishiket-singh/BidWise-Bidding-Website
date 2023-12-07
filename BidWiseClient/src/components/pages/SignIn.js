@@ -11,6 +11,7 @@ function SignIn() {
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   function handleNameChange(e) {
     const k = e.target.value;
@@ -47,6 +48,7 @@ function SignIn() {
         password: password,
       });
       console.log(response.data);
+      redirect(response.data)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,6 +60,20 @@ function SignIn() {
     console.log("I got clicked");
     verify();
   }
+
+
+  function redirect(e){
+    console.log(e)
+    e.status === "sucess"
+      ? history.push({
+          pathname: "/Catalogue",
+        
+          authKey: "b5eccb4c-2982-4d6d-807b-2270ecff6d25",
+          //'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
+        })
+        : alert("Wrong Password!! Try Again")
+  }
+  
 
   return (
     <div className="container">
@@ -78,7 +94,7 @@ function SignIn() {
           value={password}
           onChange={handlePassChange}
         ></input>
-        <button type="submit"> Sign In</button>
+        <button type="submit" onClick={handleSignIn}> Sign In</button>
       </form>
     </div>
   );
