@@ -44,8 +44,11 @@ public class UserController {
     @PostMapping("/signin")
 
     public SigninResponseDto signIn(@RequestBody @Validated SigninDto signInDto) throws AuthenticationFailException {
-        return userService.signIn(signInDto);
-
+    	if(signInDto.getEmail().isBlank() || signInDto.getPassword().isBlank()){
+    		return new SigninResponseDto("Try Again", "Empty fields are not allowed ");
+       
+    	}
+    	 return userService.signIn(signInDto);
     }
 
     @PostMapping("/forgotpassword")
