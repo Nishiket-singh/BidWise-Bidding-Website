@@ -49,7 +49,8 @@ public class BiddingService {
 	public BiddingDto getItemAndBiddingDetails(Integer productid) {
 		//Get product info using product repository.
 		Product product = productRepository.getReferenceById(productid); 
-		
+		long totaltime = product.getTotaltime();
+    	String time = timer.getRemainingTime(totaltime);
 		BiddingDto biddingDto;
 		//check for product bidding type
 		if(product.getAuctiontype().equals("Forward")){
@@ -61,10 +62,10 @@ public class BiddingService {
 				highestBidderName = highestbid.getUser().getFirstName();
 			}
 			// 
-			biddingDto = new BiddingDto( product.getName(),product.getDescription(), product.getShippingtime(), highestbid.getHighestbidamount(), highestBidderName);
+			biddingDto = new BiddingDto( product.getName(),product.getDescription(), product.getShippingtime(), highestbid.getHighestbidamount(), highestBidderName, time);
 		}
 		else {
-			biddingDto = new BiddingDto( product.getName(), product.getDescription(), product.getShippingtime(), Integer.valueOf(product.getInitialprice()), null);
+			biddingDto = new BiddingDto( product.getName(), product.getDescription(), product.getShippingtime(), Integer.valueOf(product.getInitialprice()), null, null);
 		}
 		
 		return biddingDto;
