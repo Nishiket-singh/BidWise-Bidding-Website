@@ -95,10 +95,10 @@ function BiddingEnd() {
           </div>
 
           <div className="ItemInfobid">
-            <h1 className="hcss"> {itemInfo.name}</h1>
+            <h1 className="hcss"> {itemInfo.itemname}</h1>
             <p className="pcss">
               {" "}
-              <strong classname="colorblkbid">Item Description:</strong>{" "}
+              <strong classname="colorblkb`id">Item Description:</strong>{" "}
               {itemInfo.itemdesc}
             </p>
 

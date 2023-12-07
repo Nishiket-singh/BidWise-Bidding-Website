@@ -17,17 +17,23 @@ function ForwardAuction() {
     highestbidder: null,
   });
 
+ 
+
   const [price, setPrice] = useState();
 
   const Location = useLocation();
   const history = useHistory();
   // pid from the auction page, use this when making the API call
   let pid = Location.state.productid;
+  let timeRem=Location.state.time;
+  console.log(timeRem);
+
   pid = parseInt(pid);
   console.log(pid);
   console.log(typeof pid);
   const authKey = String(Location.authKey);
   console.log(authKey);
+  const[time,settime]=useState(timeRem);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -53,6 +59,7 @@ function ForwardAuction() {
 
   const verify = async () => {
     console.log(authKey);
+   
     try {
       const response2 = await axios.post(
         `http://localhost:8080/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
@@ -81,6 +88,10 @@ function ForwardAuction() {
   };
 
   function handleBid() {
+    if (price==null){
+      alert("please enter input")
+
+    }
     console.log("place bid clicked");
     verify();
 
@@ -91,6 +102,8 @@ function ForwardAuction() {
 
     // })
   }
+
+  
 
   return (
     <div className="mainContainer">
@@ -118,7 +131,7 @@ function ForwardAuction() {
           {auctionInfo.itemdesc}{" "}
         </p>
 
-        <h1 className="hk"> Time Remaining: {auctionInfo.totaltime} </h1>
+        <h1 className="hk"> Time Remaining: {time} </h1>
 
         <div className="bidds">
           <input
