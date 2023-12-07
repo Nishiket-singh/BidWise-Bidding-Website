@@ -14,7 +14,7 @@ function CatalogueS() {
   };
 
   const [items, setItems] = useState([a, a, a, a]);
-  const [searchItem, setSearchItem] = useState();
+  const [searchItem, setSearchItem] = useState('');
 
   const [selectedItem, setSelectedItem] = useState({ type: "", id: 0 });
   const history = useHistory();
@@ -36,6 +36,29 @@ function CatalogueS() {
     // Call the async function
     getProducts();
   }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+
+  const getSearchedProducts = async (keyw) => {
+    console.log(keyw)
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/products/searchproducts",{}, {"keyword":`${keyw}`}
+      );
+      console.log(response.data);
+
+      setItems(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+
+
+  function searchUsingKeyword(keyword){
+    console.log("I was called");
+    console.log(keyword);
+    
+    getSearchedProducts(keyword);
+  }
 
   function handleRadioClick(event) {
     let pid = event.target.id;
@@ -65,6 +88,7 @@ function CatalogueS() {
     let k = event.target.value;
     console.log(k);
     setSearchItem(k);
+    searchUsingKeyword(k);
   }
 
   return (
@@ -79,6 +103,7 @@ function CatalogueS() {
         value={searchItem}
         className="searchButton"
       ></input>
+       
 
       {/* can remove index once api provide unique id for each product */}
       {items.map((item) => (
