@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class PaymentService {
 	
-	@Value("$pk_test_51OKmZFHIotgXIUI1GK0E0MA5DFp8rQPvS6qmURwDjwSV7t7foCfQr0s5v1SNT4E2e5sk1RjfanPDguNiT5tpf3IP00N2SQkD4N")
+	@Value("${stripe.apiKey}")
 	private String stripeApiKey;
 	
 	@Autowired

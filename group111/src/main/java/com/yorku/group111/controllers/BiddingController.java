@@ -47,8 +47,8 @@ public class BiddingController {
 	}
 	
 	@GetMapping("/endforwardbid")
-	public ResponseDto endForwardBid(@RequestBody Map<String, Integer> requestBody) {
-		Integer productid = requestBody.get("productid");
+	public ResponseDto endForwardBid(@RequestParam("productid") Integer productId) {
+		Integer productid = productId;
 		return biddingService.endForwardBid(productid);
 	}
 	
