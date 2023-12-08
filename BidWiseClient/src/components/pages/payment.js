@@ -28,7 +28,7 @@ function Payment() {
     const getUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/payment/userdetails?productid=${pid}`
+          `https://bidd-caim.onrender.com/payment/userdetails?productid=${pid}`
         );
         console.log(response.data);
         setWinner(response.data);

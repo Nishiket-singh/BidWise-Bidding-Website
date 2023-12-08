@@ -4,7 +4,6 @@ import "./SignIn.css";
 import { Link, useHistory } from "react-router-dom";
 
 function SignIn() {
-
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -21,15 +20,17 @@ function SignIn() {
     setPassword(k);
   }
 
-
   const verify = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/user/signin", {
-        email: name,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://bidd-caim.onrender.com/user/signin",
+        {
+          email: name,
+          password: password,
+        }
+      );
       console.log(response.data);
-      redirect(response.data)
+      redirect(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -42,26 +43,18 @@ function SignIn() {
     verify();
   }
 
-
-  function redirect(e){
-    console.log(e)
-    console.log(e.token)
-   if( e.status === "sucess"){
-
+  function redirect(e) {
+    console.log(e);
+    console.log(e.token);
+    if (e.status === "sucess") {
       history.push({
         pathname: "/Catalogue",
-      
+
         authKey: e.token,
-       
-      })
-
-      
+      });
+    } else if (e.status === "Try Again") {
+      alert(`${e.token}`);
     }
-    else if(e.status === "Try Again"){
-      alert(`${e.token}`)
-
-      
-  }
   }
   return (
     <div className="container">
@@ -82,12 +75,13 @@ function SignIn() {
           value={password}
           onChange={handlePassChange}
         ></input>
-        <button type="submit" onClick={handleSignIn}> Sign In</button>
+        <button type="submit" onClick={handleSignIn}>
+          {" "}
+          Sign In
+        </button>
       </form>
     </div>
   );
 }
 
 export default SignIn;
-
-

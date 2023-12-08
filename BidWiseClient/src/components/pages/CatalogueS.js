@@ -13,14 +13,14 @@ function CatalogueS() {
   };
   // [a, a, a, a]
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([a, a, a, a]);
   const [searchItem, setSearchItem] = useState('');
   
   const [selectedItem, setSelectedItem] = useState({ type: "", id: 0, time:0 });
   const history = useHistory();
-  const Location= useLocation();
-  let authKey=Location.authKey;
-  console.log(authKey)
+  const Location = useLocation();
+  let authKey = Location.authKey;
+  console.log(authKey);
 
   const reloadPage = () => {
     window.location.reload();
@@ -43,21 +43,21 @@ function CatalogueS() {
     // Call the async function
     getProducts();
 
-
      // Reload the page every 2 minutes
-     const intervalId = setInterval(reloadPage, 60000);
+     const intervalId = setInterval(reloadPage, 120000);
 
-     // Cleanup the interval on component unmount
-     return () => clearInterval(intervalId);
-   }, []);
+    // Cleanup the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   // }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
   const getSearchedProducts = async (keyw) => {
-    console.log(keyw)
+    console.log(keyw);
     try {
       const response = await axios.get(
-        `http://localhost:8080/products/searchproducts?keyword=${keyw}`
+        "https://bidd-caim.onrender.com/products/searchproducts?keyword=${keyw}",
+        {}
       );
       console.log(response.data);
 
@@ -67,12 +67,10 @@ function CatalogueS() {
     }
   };
 
-
-
-  function searchUsingKeyword(keyword){
+  function searchUsingKeyword(keyword) {
     console.log("I was called");
     console.log(keyword);
-    
+
     getSearchedProducts(keyword);
   }
 
@@ -80,24 +78,24 @@ function CatalogueS() {
     let pid = event.target.id;
     let atype = event.target.value;
 
-    let timerem=event.target.getAttribute('time')
+    let timerem = event.target.getAttribute("time");
     console.log(timerem);
     console.log(atype);
     console.log(pid);
-    setSelectedItem({ type: atype, id: pid, time:timerem  });
+    setSelectedItem({ type: atype, id: pid, time: timerem });
   }
   function handleBidClick() {
     selectedItem.type === "Forward"
       ? history.push({
           pathname: "/ForwardAuction",
-          state: { productid: selectedItem.id, time:selectedItem.time },
+          state: { productid: selectedItem.id, time: selectedItem.time },
 
           authKey: authKey,
           //'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
         })
       : history.push({
           pathname: "/DutchAuction",
-          state: { productid: selectedItem.id, time:selectedItem.time },
+          state: { productid: selectedItem.id, time: selectedItem.time },
           authKey: authKey,
           // 'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
           // 'b5eccb4c-2982-4d6d-807b-2270ecff6d25'
@@ -123,7 +121,6 @@ function CatalogueS() {
         value={searchItem}
         className="searchButton"
       ></input>
-       
 
       {/* can remove index once api provide unique id for each product */}
       {items.map((item) => (

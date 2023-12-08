@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./SignUp.css";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function SignUp() {
-
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -23,13 +22,13 @@ function SignUp() {
     verify();
   }
 
-  function redirect(e){
-    console.log(e)
+  function redirect(e) {
+    console.log(e);
     e.status === "success"
       ? history.push({
           pathname: "/SignIn",
         })
-        : alert(e.message)
+      : alert(e.message);
   }
 
   function handleFnameChange(e) {
@@ -85,24 +84,23 @@ function SignUp() {
     setCpassword(k);
   }
 
-
-
-
   const verify = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/user/signup", {
-        firstname: fname,
-        password: password,
-        lastname: lname,
-        email: email,
-        streetaddress: StreetAddress,
-        postalcode: PostalCode,
-        city: City,
-        country: Country
-
-      });
+      const response = await axios.post(
+        "https://bidd-caim.onrender.com/user/signup",
+        {
+          firstname: fname,
+          password: password,
+          lastname: lname,
+          email: email,
+          streetaddress: StreetAddress,
+          postalcode: PostalCode,
+          city: City,
+          country: Country,
+        }
+      );
       console.log(response.data);
-      redirect(response.data)
+      redirect(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -112,19 +110,61 @@ function SignUp() {
     <div className="SignUp-container">
       <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
-        <input name="fname" type="text" placeholder="First Name" value={fname} onChange={handleFnameChange} />
+        <input
+          name="fname"
+          type="text"
+          placeholder="First Name"
+          value={fname}
+          onChange={handleFnameChange}
+        />
 
-        <input name="lname" type="text" placeholder="Last Name" value={lname} onChange={handleLnameChange}/>
+        <input
+          name="lname"
+          type="text"
+          placeholder="Last Name"
+          value={lname}
+          onChange={handleLnameChange}
+        />
 
-        <input name="email" type="email" placeholder="Email" value={email} onChange={handleEmailChange}/>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
 
-        <input name="StreetAddress" type="text" placeholder="Address" value={StreetAddress} onChange={handleStreetAddressChange}/>
+        <input
+          name="StreetAddress"
+          type="text"
+          placeholder="Address"
+          value={StreetAddress}
+          onChange={handleStreetAddressChange}
+        />
 
-        <input name="PostalCode" type="text" placeholder="Postal Code" value={PostalCode} onChange={handlePostalCodeChange}/>
+        <input
+          name="PostalCode"
+          type="text"
+          placeholder="Postal Code"
+          value={PostalCode}
+          onChange={handlePostalCodeChange}
+        />
 
-        <input name="City" type="text" placeholder="City" value={City} onChange={handleCityChange}/>
+        <input
+          name="City"
+          type="text"
+          placeholder="City"
+          value={City}
+          onChange={handleCityChange}
+        />
 
-        <input name="Country" type="text" placeholder="Country" value={Country} onChange={handleCountryChange}/>
+        <input
+          name="Country"
+          type="text"
+          placeholder="Country"
+          value={Country}
+          onChange={handleCountryChange}
+        />
 
         <input
           name="password"
@@ -141,7 +181,10 @@ function SignUp() {
           value={cpassword}
           onChange={handleCpasswordChange}
         />
-          <button type="submit" onClick={handleSignUp}> Sign Up</button>
+        <button type="submit" onClick={handleSignUp}>
+          {" "}
+          Sign Up
+        </button>
       </form>
     </div>
   );
