@@ -15,6 +15,7 @@ function ForwardAuction() {
     itemshippingprice: 90,
     currentprice: 190,
     highestbidder: null,
+    remainingtime:""
   });
 
  
@@ -25,15 +26,24 @@ function ForwardAuction() {
   const history = useHistory();
   // pid from the auction page, use this when making the API call
   let pid = Location.state.productid;
-  let timeRem=Location.state.time;
-  console.log(timeRem);
+ 
 
   pid = parseInt(pid);
   console.log(pid);
-  console.log(typeof pid);
+  
   const authKey = String(Location.authKey);
-  console.log(authKey);
-  const[time,settime]=useState(timeRem);
+
+  
+
+
+  const reloadPage = () => {
+    window.location.reload();
+    
+
+    
+
+  
+  };
 
   useEffect(() => {
     const getProducts = async () => {
@@ -43,13 +53,49 @@ function ForwardAuction() {
         );
         console.log(response.data);
         setAuctionInfo(response.data);
+
+        console.log(auctionInfo.remainingtime);
+
+        console.log(typeof(auctionInfo.remainingtime));
+
+
+        var timeArray = auctionInfo.remainingtime.split(':');
+ 
+        var hours = parseInt(timeArray[0], 10);
+        var minutes = parseInt(timeArray[1], 10);
+        var seconds = parseInt(timeArray[2], 10);
+        var totalSeconds=hours*3600+minutes*60+seconds
+        console.log("Hours: " + hours);
+        console.log("Minutes: " + minutes);
+        console.log("Seconds: " + seconds);
+        console.log(totalSeconds);
+
+        if (totalSeconds<0){
+            history.push({
+              pathname: '/BiddingEnd',
+              state: { productid: pid },
+              authKey:authKey
+               })
+
+     
+        }
+
+    
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     getProducts();
-  }, [pid]);
+
+    // Reload the page every 2 minutes
+    const intervalId = setInterval(reloadPage, 60000);
+
+    
+    return () => clearInterval(intervalId);
+  }, [pid, auctionInfo.remainingtime, history]);
+
+
 
   function handlePrice(event) {
     let p = event.target.value;
@@ -95,12 +141,7 @@ function ForwardAuction() {
     console.log("place bid clicked");
     verify();
 
-    // history.push({
-    //   pathname: '/BiddingEnd',
-    //   state: { productid: pid },
-    //   authKey:authKey
-
-    // })
+    
   }
 
   
@@ -131,7 +172,7 @@ function ForwardAuction() {
           {auctionInfo.itemdesc}{" "}
         </p>
 
-        <h1 className="hk"> Time Remaining: {time} </h1>
+        <h1 className="hk"> Time Remaining: {auctionInfo.remainingtime} </h1>
 
         <div className="bidds">
           <input
