@@ -18,7 +18,7 @@ import com.yorku.group111.exceptions.AuthenticationFailException;
 
 
 @RequestMapping("user")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://frontend-bidding.onrender.com/")
 @RestController
 public class UserController {
 
