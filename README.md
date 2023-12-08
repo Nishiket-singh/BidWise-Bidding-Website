@@ -1,3 +1,8 @@
+Official Website: https://frontend-bidding.onrender.com/
+Backend Deployment: https://bidd-caim.onrender.com/
+
+
+
 1. Download zip file. 
 2. Extract it.
 3. Import group111 package as a maven project in eclipse to run the backend.The front end is in BidwiseClient package. See at the bottom.
