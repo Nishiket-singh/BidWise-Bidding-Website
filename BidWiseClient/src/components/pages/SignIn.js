@@ -4,11 +4,6 @@ import "./SignIn.css";
 import { Link, useHistory } from "react-router-dom";
 
 function SignIn() {
-  // const [form,setForm]= useState({
-  //     name:'',
-  //     password:'',
-  // });
-
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -25,30 +20,17 @@ function SignIn() {
     setPassword(k);
   }
 
-  // useEffect(() => {
-  //     const verify = async () => {
-  //       try {
-
-  //         const response = await axios.post("http://localhost:8080/user/signin", {email:name, password:password });
-  //         console.log(response.data);
-  //         // setItems(response.data);
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);
-  //       }
-  //     };
-
-  //     // Call the async function
-  //     verify();
-  //   }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
-
   const verify = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/user/signin", {
-        email: name,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://bidd-caim.onrender.com/user/signin",
+        {
+          email: name,
+          password: password,
+        }
+      );
       console.log(response.data);
-      redirect(response.data)
+      redirect(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -61,20 +43,19 @@ function SignIn() {
     verify();
   }
 
+  function redirect(e) {
+    console.log(e);
+    console.log(e.token);
+    if (e.status === "sucess") {
+      history.push({
+        pathname: "/Catalogue",
 
-  function redirect(e){
-    console.log(e)
-    e.status === "sucess"
-      ? history.push({
-          pathname: "/Catalogue",
-        
-          authKey: "b5eccb4c-2982-4d6d-807b-2270ecff6d25",
-          //'ada7dbd4-18f0-4167-af7b-751f3bc5e706'
-        })
-        : alert("Wrong Password!! Try Again")
+        authKey: e.token,
+      });
+    } else if (e.status === "Try Again") {
+      alert(`${e.token}`);
+    }
   }
-  
-
   return (
     <div className="container">
       <h1>Sign In</h1>
@@ -82,7 +63,7 @@ function SignIn() {
         <input
           name="name"
           type="text"
-          placeholder="Enter Name"
+          placeholder="Enter Email"
           value={name}
           onChange={handleNameChange}
         ></input>
@@ -94,12 +75,13 @@ function SignIn() {
           value={password}
           onChange={handlePassChange}
         ></input>
-        <button type="submit" onClick={handleSignIn}> Sign In</button>
+        <button type="submit" onClick={handleSignIn}>
+          {" "}
+          Sign In
+        </button>
       </form>
     </div>
   );
 }
 
 export default SignIn;
-
-//<Link  exact to="/Catalogue">  </Link>

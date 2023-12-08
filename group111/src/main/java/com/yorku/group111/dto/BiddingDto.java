@@ -6,15 +6,25 @@ public class BiddingDto {
 	private String itemshippingprice;
 	private Integer currentprice;
 	private String highestbidder;
+	private String remainingtime;
 	
-	public BiddingDto(String itemname, String itemdesc, String itemshippingprice, Integer currentprice,String highestbidder) {
+	public BiddingDto(String itemname, String itemdesc, String itemshippingprice, Integer currentprice,String highestbidder,String remainingtime) {
 		this.itemname = itemname;
 		this.itemdesc = itemdesc;
 		this.itemshippingprice = itemshippingprice;
 		this.currentprice = currentprice;
 		this.highestbidder = highestbidder;
+		this.remainingtime = remainingtime;
 	}
 	
+	public String getRemainingtime() {
+		return remainingtime;
+	}
+
+	public void setRemainingtime(String remainingtime) {
+		this.remainingtime = remainingtime;
+	}
+
 	public String getItemname() {
 		return itemname;
 	}
