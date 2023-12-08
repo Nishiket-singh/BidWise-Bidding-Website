@@ -27,12 +27,17 @@ public class ApplicationStartTime {
     public String getRemainingTime(long totaltime) {
     	Long elapsedInSeconds = this.getElapsedTime().toSeconds();
     	System.out.println(elapsedInSeconds);
+    	String time;
     	long timeRemaining = totaltime - elapsedInSeconds;
-    	System.out.println(timeRemaining);
-    	long hours = timeRemaining / 3600; // Extract hours
-        long minutes = (timeRemaining % 3600) / 60; // Extract remaining minutes
-        long seconds = timeRemaining % 60; // Extract remaining seconds
-        String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    	if(timeRemaining<0) {
+    		time = String.format("00:00:00");
+    	}
+    	else {
+    		long hours = timeRemaining / 3600; // Extract hours
+            long minutes = (timeRemaining % 3600) / 60; // Extract remaining minutes
+            long seconds = timeRemaining % 60; // Extract remaining seconds
+            time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    	}
         return time;
     }
     
