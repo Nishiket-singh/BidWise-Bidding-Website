@@ -27,6 +27,7 @@ function BiddingEnd() {
     const getItem = async () => {
       try {
         const response = await axios.get(
+          https://bidd-caim.onrender.com/
           `https://bidd-caim.onrender.com/bidding/productdetails?productid=${pid}`
         );
         console.log(response.data);
@@ -50,7 +51,7 @@ function BiddingEnd() {
     //console.log(authKey);
     try {
       const response2 = await axios.get(
-        `http://localhost:8080/bidding/paynow?productid=${pid}&expediatedShipment=${rad}`,
+        `https://bidd-caim.onrender.com/paynow?productid=${pid}&expediatedShipment=${rad}`,
         {
           headers: {
             Authorization: `Bearer ${authKey}`, // Include the token in the Authorization header

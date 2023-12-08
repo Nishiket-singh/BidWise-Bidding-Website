@@ -18,32 +18,17 @@ function ForwardAuction() {
     remainingtime:""
   });
 
- 
-
   const [price, setPrice] = useState();
 
   const Location = useLocation();
   const history = useHistory();
   // pid from the auction page, use this when making the API call
   let pid = Location.state.productid;
- 
-
   pid = parseInt(pid);
   console.log(pid);
-  
+  console.log(typeof pid);
   const authKey = String(Location.authKey);
-
-  
-
-
-  const reloadPage = () => {
-    window.location.reload();
-    
-
-    
-
-  
-  };
+  console.log(authKey);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -53,49 +38,24 @@ function ForwardAuction() {
         );
         console.log(response.data);
         setAuctionInfo(response.data);
-
-        console.log(auctionInfo.remainingtime);
-
-        console.log(typeof(auctionInfo.remainingtime));
+        
 
 
-        var timeArray = auctionInfo.remainingtime.split(':');
- 
-        var hours = parseInt(timeArray[0], 10);
-        var minutes = parseInt(timeArray[1], 10);
-        var seconds = parseInt(timeArray[2], 10);
-        var totalSeconds=hours*3600+minutes*60+seconds
-        console.log("Hours: " + hours);
-        console.log("Minutes: " + minutes);
-        console.log("Seconds: " + seconds);
-        console.log(totalSeconds);
 
-        if (totalSeconds<0){
-            history.push({
-              pathname: '/BiddingEnd',
-              state: { productid: pid },
-              authKey:authKey
-               })
 
-     
-        }
 
-    
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     getProducts();
-
-    // Reload the page every 2 minutes
-    const intervalId = setInterval(reloadPage, 60000);
-
     
-    return () => clearInterval(intervalId);
-  }, [pid, auctionInfo.remainingtime, history]);
 
 
+
+
+  }, [pid]);
 
   function handlePrice(event) {
     let p = event.target.value;
@@ -105,10 +65,9 @@ function ForwardAuction() {
 
   const verify = async () => {
     console.log(authKey);
-   
     try {
       const response2 = await axios.post(
-        `http://localhost:8080/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
+        `https://bidd-caim.onrender.com/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
         {},
         {
           headers: {
@@ -134,17 +93,66 @@ function ForwardAuction() {
   };
 
   function handleBid() {
-    if (price==null){
-      alert("please enter input")
-
-    }
     console.log("place bid clicked");
     verify();
 
-    
-  }
+    // history.push({
+    //   pathname: '/BiddingEnd',
+    //   state: { productid: pid },
+    //   authKey:authKey
 
-  
+    // })
+
+
+    var timeArray = auctionInfo.remainingtime.split(':');
+ 
+        var hours = parseInt(timeArray[0], 10);
+        var minutes = parseInt(timeArray[1], 10);
+        var seconds = parseInt(timeArray[2], 10);
+        var totalSeconds=hours*3600+minutes*60+seconds
+        console.log("Hours: " + hours);
+        console.log("Minutes: " + minutes);
+        console.log("Seconds: " + seconds);
+        console.log(totalSeconds);
+
+           // Set a timer for 5 minutes (300,000 milliseconds)
+        //const timerDuration = 1 * 60 * 1000; // 5 minutes in milliseconds
+         console.log("im here")
+       
+
+        //  const timerId = setTimeout(() => {
+        //   // This code will be executed after 5 minutes
+        //   console.log('Timer expired after 5 minutes.');
+
+        //   //call end bidding forward
+if (totalSeconds<2){ 
+  history.push({
+          pathname: '/BiddingEnd',
+          state: { productid: pid },
+          authKey:authKey
+    
+        })
+ }
+        //   history.push({
+        //       pathname: '/BiddingEnd',
+        //       state: { productid: pid },
+        //       authKey:authKey
+        
+        //     })
+          
+          
+        //   // Add any actions you want to perform after the timer expires
+
+        //   // Clear the timer if needed
+        //   // clearTimeout(timerId);
+        // }, totalSeconds);
+
+
+
+
+
+
+  }
 
   return (
     <div className="mainContainer">
