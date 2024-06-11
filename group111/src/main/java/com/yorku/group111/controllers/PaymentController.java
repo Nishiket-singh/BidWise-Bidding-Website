@@ -22,7 +22,7 @@ import com.yorku.group111.service.PaymentService;
 
 
 @RestController
-@CrossOrigin(origins = "https://frontend-bidding.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/payment")
 public class PaymentController {
 	

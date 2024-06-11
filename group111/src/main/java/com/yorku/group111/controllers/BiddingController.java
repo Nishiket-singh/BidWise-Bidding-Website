@@ -18,7 +18,7 @@ import com.yorku.group111.dto.SubmitBidDto;
 import com.yorku.group111.service.BiddingService;
 
 
-@CrossOrigin(origins = "https://frontend-bidding.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("bidding")
 @RestController
 public class BiddingController {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yorku.group111.dto.ResponseDto;
 
-@CrossOrigin(origins = "https://frontend-bidding.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class TestController {
 	

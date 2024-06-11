@@ -19,7 +19,7 @@ import com.yorku.group111.service.ProductService;
 
 
 @RequestMapping("/products")
-@CrossOrigin(origins = "https://frontend-bidding.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ProductController {
 	
