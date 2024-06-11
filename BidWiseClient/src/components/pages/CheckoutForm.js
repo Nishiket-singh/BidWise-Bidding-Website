@@ -38,7 +38,7 @@ const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "http://localhost:8080/ReceiptPage",
+        return_url: "http://localhost:3000/ReceiptPage",
       },
     });
 
