@@ -18,6 +18,14 @@ function ForwardAuction() {
     remainingtime:""
   });
 
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
   const [price, setPrice] = useState();
 
   const Location = useLocation();
@@ -27,7 +35,7 @@ function ForwardAuction() {
   pid = parseInt(pid);
   console.log(pid);
   console.log(typeof pid);
-  const authKey = String(Location.authKey);
+  const authKey = getCookie('authToken');
   console.log(authKey);
 
   useEffect(() => {

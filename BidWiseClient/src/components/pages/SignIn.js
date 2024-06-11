@@ -30,6 +30,10 @@ function SignIn() {
         }
       );
       console.log(response.data);
+      const isSecure = window.location.protocol === 'https:';
+      document.cookie = `authToken=${response.data.token}; path=/; ${isSecure ? 'secure;' : ''}`;
+      // document.cookie = "authToken=" + response.data.token + "; path=/; secure; HttpOnly";
+      console.log(getCookie('authToken'))
       redirect(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -43,15 +47,26 @@ function SignIn() {
     verify();
   }
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
   function redirect(e) {
     console.log(e);
     console.log(e.token);
     if (e.status === "sucess") {
+      console.log(getCookie('authToken'));
       history.push({
         pathname: "/Catalogue",
+       
 
-        authKey: e.token,
+        authKey: getCookie('authToken'),
       });
+
+
     } else if (e.status === "Try Again") {
       alert(`${e.token}`);
     }

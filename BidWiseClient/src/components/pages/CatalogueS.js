@@ -13,13 +13,21 @@ function CatalogueS() {
   };
   // [a, a, a, a]
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
   const [items, setItems] = useState([a, a, a, a]);
   const [searchItem, setSearchItem] = useState('');
   
   const [selectedItem, setSelectedItem] = useState({ type: "", id: 0, time:0 });
   const history = useHistory();
   const Location = useLocation();
-  let authKey = Location.authKey;
+  let authKey = getCookie('authToken');
+
   console.log(authKey);
 
   const reloadPage = () => {
@@ -165,6 +173,4 @@ function CatalogueS() {
 
 export default CatalogueS;
 
-{
-  /* <Link  to="/ForwardAuction"> </Link> */
-}
+

@@ -19,11 +19,19 @@ function DutchAuction() {
     initialprice: 400,
   });
 
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
   const Location = useLocation();
   const history = useHistory();
   //pid from auction page use this when making api call
   const pid = Location.state.productid;
-  const authKey = String(Location.authKey);
+  const authKey = getCookie('authToken');
   console.log(authKey);
 
   useEffect(() => {
