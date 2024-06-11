@@ -34,7 +34,7 @@ function ForwardAuction() {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          `https://bidd-caim.onrender.com/bidding/productdetails?productid=${pid}`
+          `http://localhost:8080/bidding/productdetails?productid=${pid}`
         );
         console.log(response.data);
         setAuctionInfo(response.data);
@@ -67,7 +67,7 @@ function ForwardAuction() {
     console.log(authKey);
     try {
       const response2 = await axios.post(
-        `https://bidd-caim.onrender.com/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
+        `http://localhost:8080/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
         {},
         {
           headers: {

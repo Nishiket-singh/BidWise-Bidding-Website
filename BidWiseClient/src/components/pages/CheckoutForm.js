@@ -38,7 +38,7 @@ const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://bidd-caim.onrender.com/ReceiptPage",
+        return_url: "https://localhost:8080/ReceiptPage",
       },
     });
 

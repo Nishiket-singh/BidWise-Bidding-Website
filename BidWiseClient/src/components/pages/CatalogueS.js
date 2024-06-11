@@ -30,7 +30,7 @@ function CatalogueS() {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          "https://bidd-caim.onrender.com/products/allproducts"
+          "https://localhost:8080/products/allproducts"
         );
         console.log(response.data);
 

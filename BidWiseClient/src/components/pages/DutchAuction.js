@@ -30,7 +30,7 @@ function DutchAuction() {
     const getItem = async () => {
       try {
         const response = await axios.get(
-          `https://bidd-caim.onrender.com/bidding/productdetails?productid=${pid}`
+          `http://localhost:8080/bidding/productdetails?productid=${pid}`
         );
         console.log(response.data);
 
@@ -48,7 +48,7 @@ function DutchAuction() {
     console.log(authKey);
     try {
       const response2 = await axios.post(
-        `https://bidd-caim.onrender.com/bidding/dutchbid?productid=${pid}`,
+        `http://localhost:8080/bidding/dutchbid?productid=${pid}`,
         {},
         {
           headers: {

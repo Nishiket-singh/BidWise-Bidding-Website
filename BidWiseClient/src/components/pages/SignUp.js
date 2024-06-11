@@ -87,7 +87,7 @@ function SignUp() {
   const verify = async () => {
     try {
       const response = await axios.post(
-        "https://bidd-caim.onrender.com/user/signup",
+        "http://localhost:8080/user/signup",
         {
           firstname: fname,
           password: password,
