@@ -1,6 +1,6 @@
-Official Website: https://frontend-bidding.onrender.com/
+Official Website: https://bidwise.netlify.app.com/
 
-Backend Deployment: https://bidd-caim.onrender.com/
+Backend Deployment: https://springbackendapi.onrender.com/
 
 Docker Images: nishiket0055/docker-springboot-app 
 nishiket0055/frontend
