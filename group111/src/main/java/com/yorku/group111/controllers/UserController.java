@@ -18,7 +18,7 @@ import com.yorku.group111.exceptions.AuthenticationFailException;
 
 
 @RequestMapping("user")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://bidwise.netlify.app/")
 @RestController
 public class UserController {
 

@@ -19,7 +19,7 @@ import com.yorku.group111.service.ProductService;
 
 
 @RequestMapping("/products")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://bidwise.netlify.app/")
 @RestController
 public class ProductController {
 	

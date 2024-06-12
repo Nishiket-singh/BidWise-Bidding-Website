@@ -22,7 +22,7 @@ import com.yorku.group111.service.PaymentService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://bidwise.netlify.app/")
 @RequestMapping("/payment")
 public class PaymentController {
 	
