@@ -56,7 +56,7 @@ function DutchAuction() {
     console.log(authKey);
     try {
       const response2 = await axios.post(
-        `http://localhost:8080/bidding/dutchbid?productid=${pid}`,
+        `https://ecombackendapi.onrender.com/bidding/dutchbid?productid=${pid}`,
         {},
         {
           headers: {
