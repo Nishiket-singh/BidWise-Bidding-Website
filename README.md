@@ -1,48 +1,17 @@
-Official Website: https://bidwise.netlify.app.com/
+Full stack web Application with user authentication and authorization features, a product catalog that offers a diverse range of products to users, a bidding system allowing users to select and bid on products of their choice, payment flow enabling users to process payments upon winning a bid and third party service Stripe API integrated for secure and seamless payment processing. Backend end implemented using Spring boot framework with SQL database and React for frontend.
 
-Backend Deployment: https://springbackendapi.onrender.com/
-
-Docker Images: nishiket0055/docker-springboot-app 
-nishiket0055/frontend
-
-
-
+### How to run the project
 1. Download zip file. 
 2. Extract it.
 3. Import group111 package as a maven project in eclipse to run the backend.The front end is in BidwiseClient package. See at the bottom.
-4. Run EcommerceprojectApplication.java as a Java Application. If you have to reboot the application after running it once, set "spring.sql.init.mode=always" to "spring.sql.init.mode=never" in src/main/resources/application.properties.
-5. Import the postman collections and run all the collections.
+4. Run EcommerceprojectApplication.java as a Java Application. 
 
-For Testing:
-LoginCollection: Run it as a collection or reach request one by one in order and verify the responses. Each request corresponds to a test case described in the design document with first request corresponding to the first test case in Login Collection Test Cases section of the document.
+### For Frontend:
+1. Open the terminal and navigate to the project directory i.e BidwiseClient/BidwiseClient.
+2. Run npm i to install the project dependencies.
+3. After successful installation, run npm start in the terminal.
+   
+### The project demo is live and running!!
 
-ProductsCollection: Run it as a collection or reach request one by one in order and verify the responses. Each request corresponds to a test case described in the design document with first request corresponding to the first test case in Product Collection Test Cases section of the document.
-
-BiddingCollection: Run it as a collection or reach request one by one in order and verify the responses. Each request corresponds to a test case described in the design document with first request corresponding to the first test case in Bidding Collection Test Cases section of the document.
-
-Payment Test Cases: For each payment collection, Run the first command in the collection. Take the id from response and paste it in the body of second request and then send that request and verify the response.
-Each Collection corresponds to a test case in The Payment Collection Test Case section of document.
-
-For Frontend:
-Open the terminal and navigate to the project directory i.e BidwiseClient/BidwiseClient.
-
-Run npm i to install the project dependencies.
-
-After successful installation, run npm start in the terminal.
-
-Open your web browser and go to http://localhost:3000.
-
-Project Structure
-Append the following paths to access each component:
-
-     1. "/": Home Page
-     2. "/SignUp": SignUp Page
-     3. "/SignIn": SignIn Page
-     4. "/Payment": Payment Page
-     5. "/ReceiptPage": Receipt Page  
-     6. "/AboutUs": About Us Page
-     7. "/ForwardAuction": Forward Auction Page
-     8. "/DutchAuction": Dutch Auction Page
-     9. "/Catalogue": Catalogue Page
-     10. "/BiddingEnd": Bidding End Page
-     11. "/NewProduct": New Product Page
+Official Website: https://bidwise.netlify.app/
+Backend Deployment: https://ecombackendapi.onrender.com/
