@@ -75,7 +75,7 @@ function ForwardAuction() {
     console.log(authKey);
     try {
       const response2 = await axios.post(
-        `http://localhost:8080/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
+        `https://ecombackendapi.onrender.com/bidding/forwardbid?bidAmount=${price}&productid=${pid}`,
         {},
         {
           headers: {
