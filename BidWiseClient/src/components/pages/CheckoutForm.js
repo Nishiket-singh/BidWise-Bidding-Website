@@ -26,7 +26,7 @@ const CheckoutForm = () => {
     // Create the PaymentIntent
     try {
       const response = await axios.post(
-        `http://localhost:8080/payment/makepayment`
+        `https://ecombackendapi.onrender.com/payment/makepayment`
       );
       console.log(response.data);
       clientSecret = response.data.message;
@@ -38,7 +38,7 @@ const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "http://localhost:3000/ReceiptPage",
+        return_url: "https://bidwise.netlify.app/ReceiptPage",
       },
     });
 

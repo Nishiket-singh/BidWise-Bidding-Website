@@ -28,7 +28,7 @@ function BiddingEnd() {
       try {
         const response = await axios.get(
          
-          `http://localhost:8080/bidding/productdetails?productid=${pid}`
+          `https://ecombackendapi.onrender.com/bidding/productdetails?productid=${pid}`
         );
         console.log(response.data);
 

@@ -19,7 +19,7 @@ function ReceiptPage() {
     const getReceipt = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/payment/receiptdetails`
+          `https://ecombackendapi.onrender.com/payment/receiptdetails`
         );
         console.log(response.data);
         setReceipt(response.data);

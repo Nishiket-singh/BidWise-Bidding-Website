@@ -38,7 +38,7 @@ function CatalogueS() {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/products/allproducts"
+          "https://ecombackendapi.onrender.com/products/allproducts"
         );
         console.log(response.data);
 

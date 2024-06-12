@@ -87,7 +87,7 @@ function SignUp() {
   const verify = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/user/signup",
+        "https://ecombackendapi.onrender.com/user/signup",
         {
           firstname: fname,
           password: password,
