@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import "./NewBid.css";
+import "./css/NewBid.css";
 
 const NewBid = ({
   bidLabel,

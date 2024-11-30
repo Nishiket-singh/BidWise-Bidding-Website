@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import "./DutchAuction.css";
+import "./css/DutchAuction.css";
+import itemImg from "./disc-img.jpeg"
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
@@ -18,7 +19,8 @@ function DutchAuction() {
     auctiontype: "kk",
     initialprice: 400,
   });
-
+  const address1 = "http://localhost:8080";
+  const address2 = "https://ecombackendapi.onrender.com";
 
   function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -38,7 +40,7 @@ function DutchAuction() {
     const getItem = async () => {
       try {
         const response = await axios.get(
-          `https://ecombackendapi.onrender.com/bidding/productdetails?productid=${pid}`
+          address1+`/bidding/productdetails?productid=${pid}`
         );
         console.log(response.data);
 
@@ -56,7 +58,7 @@ function DutchAuction() {
     console.log(authKey);
     try {
       const response2 = await axios.post(
-        `https://ecombackendapi.onrender.com/bidding/dutchbid?productid=${pid}`,
+        address1+`/bidding/dutchbid?productid=${pid}`,
         {},
         {
           headers: {
@@ -83,44 +85,39 @@ function DutchAuction() {
   }
 
   return (
-    <div className="mainContainerdutch">
-      <div className="PhotoAndHighBidInfodutch">
-        <img
-          className="forward_itemdutch"
-          alt=""
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR8dhgHvffCJbPYCmS1PoghXcmR7jKOEPMZw&usqp=CAU"
-        ></img>
-        <h1> Shipping Price: {auctionInfo.itemshippingprice}$</h1>
-        <h1>Current Price: {auctionInfo.currentprice}$</h1>
+      <div className="mainContainer">
+          <div className="PhotoAndPriceInfo">
+              <img className="dutch_item" alt="" src={itemImg} />
+          </div>
+
+          <div className="dutch_container">
+              <h4>
+                  {auctionInfo.itemname} 
+              </h4>
+              <br />
+              <p>{auctionInfo.itemdesc}</p>
+              <br />
+              <span>
+                  <b>Current Price: </b>
+              </span>
+              <span className="price">${auctionInfo.currentprice}</span>
+              <br />
+              <span>
+                  <b>Buyer: </b>
+              </span>
+              <span className="buyer">
+                  {auctionInfo.buyer || "None"}
+              </span>
+              <br />
+              <br />
+              <button onClick={handleBidClick} className="button">
+                  Buy Now
+              </button>
+              <br />
+              <br />
+              
+          </div>
       </div>
-
-      <div className="ItemInfodutch">
-        <h1 className="hcss"> {auctionInfo.itemname}</h1>
-        <p className="pcss">
-          {" "}
-          <strong classname="colorblkdutch">Item Description:</strong>{" "}
-          {auctionInfo.itemdesc}
-        </p>
-
-        <p className="pcss">
-          <strong classname="colorblkdutch">Condition:</strong>
-          {auctionInfo.itemdesc}{" "}
-        </p>
-
-        <button
-          className="biddsdutch"
-          onClick={handleBidClick}
-          style={{ marginTop: "0px" }}
-        >
-          Buy
-        </button>
-      </div>
-    </div>
   );
 }
-
 export default DutchAuction;
-
-{
-  /* <Link exact to="/BiddingEnd"></Link> */
-}

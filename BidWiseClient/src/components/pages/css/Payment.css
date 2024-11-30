@@ -1,0 +1,56 @@
+.payment-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .winner-details {
+    flex: 1 1 400px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .winner-details h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .winner-details p {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .winner-details strong {
+    color: #000;
+  }
+  
+  .checkout-section {
+    flex: 1 1 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .checkout-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .payment-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

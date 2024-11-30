@@ -1,0 +1,129 @@
+/* ForwardAuction.css */
+
+/* Main Container Styles */
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #f4f4f4; */
+    min-height: 100vh;
+  }
+  
+  /* Styling for the image and highest bid information section */
+  .PhotoAndHighBidInfo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .forward_item {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Styling for the bidding information container */
+  .forward_container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .price, .highestBidder {
+    font-size: 18px;
+    font-weight: normal;
+    color: #333;
+  }
+  
+  .highestBidder {
+    color: #007bff; /* Blue color for the highest bidder */
+  }
+  
+  /* Input and Button Styles */
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Timer Section Styles */
+  .timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff0000; /* Red color for countdown */
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Additional Styling for the page */
+  b {
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .forward_container {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .forward_item {
+      width: 100%;
+      height: auto;
+    }
+  
+    .button {
+      font-size: 16px;
+    }
+  
+    .timer {
+      font-size: 18px;
+    }
+  }

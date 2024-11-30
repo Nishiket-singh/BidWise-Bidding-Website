@@ -1,44 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import "./navbar.css";
+import "./css/navbar.css";
 
 function Navbar() {
   return (
-    <>
-      <div className="navbar-container">
-        <div className="nav-items">
-          <Link
-            to="/"
-            exact
-            className="nav-links"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            {" "}
-            Home{" "}
-          </Link>
-          <Link
-            to="/AboutUs"
-            exact
-            className="nav-links"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            {" "}
-            About{" "}
-          </Link>
-          <Link
-            to="/Contact"
-            exact
-            className="nav-links"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            {" "}
-            Contact Us{" "}
-          </Link>
-        </div>
+    <div className="navbar-container">
+      <div className="navbar-logo">
+        <Link to="/" className="logo-link">
+          <h1>BidWise</h1>
+        </Link>
       </div>
-    </>
+      <div className="nav-items">
+        <Link to="/" className="nav-links">Home</Link>
+        <Link to="/about" className="nav-links">About Us</Link>
+        <Link to="/contact" className="nav-links">Contact Us</Link>
+      </div>
+    </div>
   );
 }
 
 export default Navbar;
+
+{/* <div className="navbar-svg">
+<img src="./darkmode.svg" alt="SVG Logo" className="navbar-svg-icon" />
+</div> */}

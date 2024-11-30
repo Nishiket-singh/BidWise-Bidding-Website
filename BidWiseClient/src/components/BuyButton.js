@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import "./BuyButton.css";
+import "./css/BuyButton.css";
 
 const BuyButton = ({
   buttonText,

@@ -1,0 +1,98 @@
+/* DutchAuction.css */
+
+/* Main Container Styles */
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Styling for the image and pricing information section */
+.PhotoAndPriceInfo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.dutch_item {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Styling for the pricing information container */
+.dutch_container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price, .buyer {
+    font-size: 18px;
+    font-weight: normal;
+    color: #333;
+}
+
+.buyer {
+    color: #28a745; /* Green color for the buyer */
+}
+
+/* Button Styles */
+.button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dutch_container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .dutch_item {
+        width: 100%;
+        height: auto;
+    }
+
+    .button {
+        font-size: 16px;
+    }
+
+    .timer {
+        font-size: 18px;
+    }
+}

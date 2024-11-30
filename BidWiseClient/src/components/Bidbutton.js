@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import "./Bidbutton.css";
+import "./css/Bidbutton.css";
 
 const Bidbutton = ({
   button,

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./SignIn.css";
+import "./css/SignIn.css";
 import { Link, useHistory } from "react-router-dom";
 
 function SignIn() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
+  const address1="http://localhost:8080"
+  const address2="https://ecombackendapi.onrender.com"
 
   function handleNameChange(e) {
     const k = e.target.value;
@@ -23,7 +26,7 @@ function SignIn() {
   const verify = async () => {
     try {
       const response = await axios.post(
-        "https://ecombackendapi.onrender.com/user/signin",
+        address1+"/user/signin",
         {
           email: name,
           password: password,
@@ -32,7 +35,6 @@ function SignIn() {
       console.log(response.data);
       const isSecure = window.location.protocol === 'https:';
       document.cookie = `authToken=${response.data.token}; path=/; ${isSecure ? 'secure;' : ''}`;
-      // document.cookie = "authToken=" + response.data.token + "; path=/; secure; HttpOnly";
       console.log(getCookie('authToken'))
       redirect(response.data);
     } catch (error) {
@@ -61,11 +63,8 @@ function SignIn() {
       console.log(getCookie('authToken'));
       history.push({
         pathname: "/Catalogue",
-       
-
         authKey: getCookie('authToken'),
       });
-
 
     } else if (e.status === "Try Again") {
       alert(`${e.token}`);
