@@ -12,6 +12,10 @@ const CheckoutForm = () => {
   const elements = useElements();
   let clientSecret;
 
+  const address1 = "http://localhost:8080";
+  const address2 = "https://ecombackendapi.onrender.com";
+
+
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -26,7 +30,7 @@ const CheckoutForm = () => {
     // Create the PaymentIntent
     try {
       const response = await axios.post(
-        `https://ecombackendapi.onrender.com/payment/makepayment`
+        address1+`/payment/makepayment`
       );
       console.log(response.data);
       clientSecret = response.data.message;
@@ -38,7 +42,7 @@ const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://bidwise.netlify.app/ReceiptPage",
+        return_url: "http://localhost:3000/ReceiptPage",
       },
     });
 

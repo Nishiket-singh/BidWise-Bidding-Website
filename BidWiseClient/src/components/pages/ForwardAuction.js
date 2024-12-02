@@ -43,6 +43,7 @@ function ForwardAuction() {
         const response = await axios.get(
           address1 + `/bidding/productdetails?productid=${pid}`
         );
+        console.log(response.data);
         setAuctionInfo(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -50,7 +51,10 @@ function ForwardAuction() {
     };
 
     getProducts();
-  }, [pid]);
+  }, []);
+
+
+
 
   // Timer functionality
   const [timeLeft, setTimeLeft] = useState(auctionInfo.remainingtime);

@@ -9,15 +9,15 @@ const address2 = "https://ecombackendapi.onrender.com";
 
 function SignUp() {
   const [formData, setFormData] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-    cpassword: "",
-    StreetAddress: "",
-    PostalCode: "",
-    City: "",
-    Country: ""
+  firstname: "",
+  lastname: "",
+  email: "",
+  password: "",
+  cpassword: "",
+  streetaddress: "",
+  postalcode: "",
+  city: "",
+  country: ""
   });
 
   const history = useHistory();
@@ -56,7 +56,7 @@ function SignUp() {
     <div className="SignUp-container">
       <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
-        {["fname", "lname", "email", "StreetAddress", "PostalCode", "City", "Country"].map(field => (
+      {["firstname", "lastname", "email", "streetaddress", "postalcode", "city", "country"].map((field) => (
           <input
             key={field}
             name={field}

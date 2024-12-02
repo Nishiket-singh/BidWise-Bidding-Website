@@ -45,3 +45,9 @@
       align-items: center;
     }
   }
+
+  .signLink{
+    text-decoration: None;
+    color:white;
+    margin-right: 40px;
+  }

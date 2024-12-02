@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -54,4 +55,7 @@ button:hover {
 
 button:active {
   background-color: #3a7c7a;
+}
+.signUpLink{
+  text-decoration: None;
 }

@@ -22,6 +22,7 @@ function ReceiptPage() {
     const getReceipt = async () => {
       try {
         const response = await axios.get(address1 + `/payment/receiptdetails`);
+        console.log(response.data)
         setReceipt(response.data);
       } catch (error) {
         console.error("Error fetching receipt data:", error);

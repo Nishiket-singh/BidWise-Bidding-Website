@@ -93,6 +93,7 @@ function SignIn() {
           {" "}
           Sign In
         </button>
+        <p> New User? <Link to="/SignUp" className="signUpLink">Sign Up here </Link></p>
       </form>
     </div>
   );

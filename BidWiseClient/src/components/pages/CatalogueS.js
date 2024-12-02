@@ -68,7 +68,15 @@ function CatalogueS() {
   };
 
   const handleBidClick = () => {
+    if (!authKey) {
+      // Redirect to sign-in page if the user is not authenticated
+      history.push("/signin");
+      return;
+    }
     const path = selectedItem.type === "Forward" ? "/ForwardAuction" : "/DutchAuction";
+    console.log(path)
+    console.log(selectedItem)
+
     history.push({
       pathname: path,
       state: { productid: selectedItem.id, time: selectedItem.time , authKey: authKey, },

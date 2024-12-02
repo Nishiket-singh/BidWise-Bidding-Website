@@ -1,5 +1,8 @@
 import React from "react";
 import "./css/AboutUs.css";
+import Hash from "./hash.jpg"
+import Nish from "./nish.jpg"
+import Raj from "./raj.jpg"
 
 function AboutUs() {
   return (
@@ -30,19 +33,22 @@ function AboutUs() {
         <div className="creatorProfiles">
           <div className="creator">
             <h3>Raj Panjabi</h3>
-            <p>Raj is a Computer Science Special Honors student with a strong background in full-stack development, AI, and machine learning. His experience includes building LLM-based models, working with Moodle plugins, and developing dynamic user interfaces. Raj is passionate about creating scalable, secure applications and has contributed significantly to projects involving PHP, React, and cloud technologies. He has also worked on AI-driven features and integration for educational platforms.</p>
+            <img className="creatorsPhoto" src={Raj}></img>
+            <p>A Computer Science Specialized Honours student.</p>
             <a href="https://rajpanjabi.github.io/Portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a> | 
             <a href="https://www.linkedin.com/in/rajpanjabi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
           <div className="creator">
             <h3>Hashim Khan</h3>
-            <p>Hashim is a skilled developer with a focus on back-end technologies, particularly in building robust APIs and integrating payment solutions. With experience in Spring Boot, Docker, and cloud technologies, Hashim has worked on several projects requiring high-performance back-end systems. His contributions are key in ensuring secure and seamless payment processing, real-time bidding, and scalability for BidWise.</p>
+            <img className="creatorsPhoto" src={Hash}></img>
+            <p>A passionate and driven Computer Science graduate.</p>
             <a href="https://hashimkhan.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio</a> | 
             <a href="https://www.linkedin.com/in/khan-hashim/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
           <div className="creator">
             <h3>Nishiket Singh</h3>
-            <p>Nishiket is an experienced software developer with expertise in full-stack development, focusing on building scalable and efficient applications. He has contributed to optimizing back-end processes, implementing CI/CD pipelines, and improving system architecture. Nishiket’s work ensures the high performance and reliability of BidWise across different environments and user traffic loads.</p>
+            <img className="creatorsPhoto" src={Nish}></img>
+            <p>A Software Engineer and CFA Level 2 candidate.</p>
             <a href="nishiket-portfolio.netlify.app/ " target="_blank" rel="noopener noreferrer">Portfolio</a> | 
             <a href="https://www.linkedin.com/in/nishiket-singh-565309183/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
