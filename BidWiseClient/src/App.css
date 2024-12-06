@@ -24,8 +24,8 @@ button:active {
 }
 .main-content {
   flex: 1;  
+  min-height: 100vh;
 }
-
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -48,5 +48,5 @@ footer {
   text-align: center;
   padding: 10px;
   width: 100%;
-  margin-top: 100px;
+  position: relative;
 }

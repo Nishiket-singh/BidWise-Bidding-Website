@@ -15,6 +15,7 @@ function CatalogueS() {
     remaningTime: "10h:48m:34s",
   };
 
+
   const [items, setItems] = useState([a, a, a, a]);
   const [searchItem, setSearchItem] = useState('');
   const [selectedItem, setSelectedItem] = useState({ type: "", id: 0, time: 0 });
@@ -37,6 +38,7 @@ function CatalogueS() {
     try {
       const response = await axios.get(address1 + "/products/allproducts");
       setItems(response.data);
+      console.log("cat info on cat page from backend", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -63,7 +65,9 @@ function CatalogueS() {
   };
 
   const handleRadioClick = (event) => {
-    const { id, value, time } = event.target;
+    const { id, value } = event.target;
+    const time = event.target.dataset.time;
+
     setSelectedItem({ type: value, id, time });
   };
 
@@ -76,6 +80,8 @@ function CatalogueS() {
     const path = selectedItem.type === "Forward" ? "/ForwardAuction" : "/DutchAuction";
     console.log(path)
     console.log(selectedItem)
+    console.log("print from catalogue one up one down")
+    console.log(selectedItem)
 
     history.push({
       pathname: path,
@@ -84,8 +90,10 @@ function CatalogueS() {
     });
   };
 
+
   return (
     <div className="catalogue-container">
+    <div className="searchContainer">
       <input
         className="searchInput"
         type="search"
@@ -93,6 +101,7 @@ function CatalogueS() {
         value={searchItem}
         onChange={handleSearch}
       />
+      </div>
       <div className="product-list">
         {items.map((item) => (
           <div className="product-card" key={item.id}>
@@ -109,8 +118,9 @@ function CatalogueS() {
               <input
                 type="radio"
                 id={item.id}
+                name="auctionType" 
                 value={item.auctionType}
-                time={item.remaningTime}
+                data-time={item.remaningTime}
                 onChange={handleRadioClick}
                 className="auction-radio"
               />

@@ -4,6 +4,14 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import "./css/BiddingEnd.css";
 import itemImg from "./disc-img.jpeg"
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
+
 function BiddingEnd() {
   const [itemInfo, setItemInfo] = useState(null);
   const [isExpedited, setIsExpedited] = useState(false);
@@ -12,7 +20,7 @@ function BiddingEnd() {
   const history = useHistory();
 
   const pid = location.state?.productid;
-  const authKey = location.authKey;
+  const authKey = getCookie('authToken');
   const address1 = "http://localhost:8080";
   const address2 = "https://ecombackendapi.onrender.com";
 
@@ -22,6 +30,7 @@ function BiddingEnd() {
         const response = await axios.get(
           address1+`/bidding/productdetails?productid=${pid}`
         );
+        console.log(response.data)
         setItemInfo(response.data);
       } catch (error) {
         console.error("Error fetching product details:", error);
@@ -51,7 +60,7 @@ function BiddingEnd() {
           authKey,
         });
       } else {
-        alert("Payment unsuccessful. Please try again.");
+        alert("Purchase unsuccessful. Please try again.");
       }
     } catch (error) {
       console.error("Error during payment process:", error);
@@ -92,7 +101,7 @@ function BiddingEnd() {
               checked={!isExpedited}
               onChange={() => setIsExpedited(false)}
             />
-            Standard Shipping: ${itemInfo.shipPrice}
+            Standard Shipping: ${itemInfo.itemshippingprice}
           </label>
           <label>
             <input
@@ -101,7 +110,7 @@ function BiddingEnd() {
               checked={isExpedited}
               onChange={handleExpeditedShipping}
             />
-            Expedited Shipping: ${itemInfo.expShip}
+            Expedited Shipping: ${parseFloat(itemInfo.itemshippingprice) + 10}
           </label>
         </div>
         <button className="pay-button" onClick={handlePayment}>

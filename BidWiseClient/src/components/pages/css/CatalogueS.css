@@ -6,13 +6,19 @@
   
   /* Search input */
   .searchInput {
-    width: 100%;
+    width: 30%;
     max-width: 400px;
     padding: 10px;
     margin: 20px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+   
+  }
+  .searchContainer{
+    display:flex;
+    justify-content: flex-end;
+    
   }
   
   .searchInput:focus {

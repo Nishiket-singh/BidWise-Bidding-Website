@@ -26,7 +26,7 @@ function Payment() {
           address1+`/payment/userdetails?productid=${pid}`
         );
         const userDetails = response.data;
-
+        console.log(userDetails)
         setWinner(userDetails);
         setAmount(userDetails.total * 100); // Stripe expects the amount in cents
       } catch (error) {

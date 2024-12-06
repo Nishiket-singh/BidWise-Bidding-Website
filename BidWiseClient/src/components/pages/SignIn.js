@@ -65,6 +65,9 @@ function SignIn() {
         pathname: "/Catalogue",
         authKey: getCookie('authToken'),
       });
+     
+      // Refresh the page to reinitialize the app
+      window.location.reload();
 
     } else if (e.status === "Try Again") {
       alert(`${e.token}`);

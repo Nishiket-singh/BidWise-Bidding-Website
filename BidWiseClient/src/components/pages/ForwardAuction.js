@@ -6,6 +6,7 @@ import discImg from "./disc-img.jpeg"
 
 
 function ForwardAuction() {
+  const [timeLeft, setTimeLeft] = useState(null);
   const [auctionInfo, setAuctionInfo] = useState({
     id: 2,
     itemname: "Macwood",
@@ -24,10 +25,23 @@ function ForwardAuction() {
   const address2 = "https://ecombackendapi.onrender.com";
 
   function getCookie(name) {
-    const value = `; ${document.cookie}`;
+    const value = `${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
+  }
+
+  async function endforwardbid(pid){
+    try {
+      const response = await axios.get(
+        address1 + `/bidding/endforwardbid?productid=${pid}`);
+      console.log(response.data);
+    
+    } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    
+
   }
 
   const [price, setPrice] = useState();
@@ -36,6 +50,7 @@ function ForwardAuction() {
   let pid = Location.state.productid;
   pid = parseInt(pid);
   const authKey = getCookie('authToken');
+ 
 
   useEffect(() => {
     const getProducts = async () => {
@@ -43,8 +58,9 @@ function ForwardAuction() {
         const response = await axios.get(
           address1 + `/bidding/productdetails?productid=${pid}`
         );
-        console.log(response.data);
+        
         setAuctionInfo(response.data);
+        setTimeLeft(response.data.remainingtime); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -57,7 +73,6 @@ function ForwardAuction() {
 
 
   // Timer functionality
-  const [timeLeft, setTimeLeft] = useState(auctionInfo.remainingtime);
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -68,6 +83,7 @@ function ForwardAuction() {
 
       if (hours === 0 && minutes === 0 && seconds === 0) {
         clearInterval(timerInterval);
+        endforwardbid(pid)
         history.push({
           pathname: "/BiddingEnd",
           state: { productid: pid },
@@ -119,6 +135,7 @@ function ForwardAuction() {
           ...prevValues,
           currentprice: response2.data.currentprice,
           highestbidder: response2.data.highestbidder,
+          
         };
       });
     } catch (error) {
@@ -183,3 +200,8 @@ function ForwardAuction() {
 }
 
 export default ForwardAuction;
+
+
+
+
+
