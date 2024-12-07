@@ -81,9 +81,12 @@ public class PaymentService {
 		User user = userRepository.getReferenceById(winnerId);
 		Product product = productRepository.getReferenceById(productId);
 		// add logic to send email for receipt here
-		String recipientEmail = "hashimahmedkhan2002@outlook.com"; // set it to users email
+		String recipientEmail = user.getEmail(); // set it to users email
 		String subject = "Thanks for your purchase";
-		String content = "This is a test email sent from Spring Boot."; // set to product and payment details
+		String content = "Order No: " + order.getId() ; // set to product and payment details
+		content += "Product: " + product.getName();
+		content += "Total: " + total;
+		content += "Shipping Address: " + user.getStreetaddress() + ", " + user.getPostalcode() + ", " + user.getCity();
 
 		try {
 			emailService.sendEmail(recipientEmail, subject, content);

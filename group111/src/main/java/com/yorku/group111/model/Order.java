@@ -33,6 +33,13 @@ public class Order {
 
     // Constructors, getters, and setters
     
+    public void setId(int id) {
+    	this.id = id;
+    }
+    
+    public Integer getId() {
+    	return this.id;
+    }
     public void setProduct(Product product) {
     	this.product = product;
     }
