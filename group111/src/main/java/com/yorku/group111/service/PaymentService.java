@@ -1,5 +1,6 @@
 package com.yorku.group111.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.yorku.group111.repository.OrderRepository;
 import com.yorku.group111.repository.ProductRepository;
 import com.yorku.group111.repository.UserRepository;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
@@ -39,6 +41,9 @@ public class PaymentService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+    @Autowired
+    private EmailService emailService;
 	
 	private Integer winnerId;
 	private Integer productId;
@@ -75,6 +80,17 @@ public class PaymentService {
 		orderRepository.save(order);
 		User user = userRepository.getReferenceById(winnerId);
 		Product product = productRepository.getReferenceById(productId);
+		// add logic to send email for receipt here
+		String recipientEmail = "hashimahmedkhan2002@outlook.com"; // set it to users email
+		String subject = "Thanks for your purchase";
+		String content = "This is a test email sent from Spring Boot."; // set to product and payment details
+
+		try {
+			emailService.sendEmail(recipientEmail, subject, content);
+			System.out.println("Email sent successfully.");
+		} catch (MessagingException | UnsupportedEncodingException e) {
+			System.out.println("Failed to send email. Error: " + e.getMessage());
+		}
 		
 		return new ReceiptDto(user.getFirstName(), user.getLastName(), user.getStreetaddress(), user.getPostalcode(), user.getCity(), user.getCountry(), total, product.getName());
 	}

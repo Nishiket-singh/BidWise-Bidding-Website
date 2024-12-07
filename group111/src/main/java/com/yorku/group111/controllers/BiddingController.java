@@ -18,7 +18,7 @@ import com.yorku.group111.dto.SubmitBidDto;
 import com.yorku.group111.service.BiddingService;
 
 
-@CrossOrigin(origins = "https://bidwise.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("bidding")
 @RestController
 public class BiddingController {
