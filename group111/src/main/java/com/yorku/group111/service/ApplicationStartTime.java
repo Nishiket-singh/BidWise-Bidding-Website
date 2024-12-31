@@ -15,20 +15,23 @@ public class ApplicationStartTime {
     @PostConstruct
     public void captureStartTime() {
         startTime = Instant.now(); // Capture the start time when the application starts
-        System.out.println(startTime);
+        //System.out.println(startTime);
     }
 
     public Duration getElapsedTime() {
         Instant currentTime = Instant.now(); // Get the current time
-        System.out.println(currentTime);
+        //System.out.println(currentTime);
         return Duration.between(startTime, currentTime); // Calculate the difference
     }
-    
-    public String getRemainingTime(long totaltime) {
+    public long getRemainingTimeInSec(long totaltime) {
     	Long elapsedInSeconds = this.getElapsedTime().toSeconds();
-    	System.out.println(elapsedInSeconds);
-    	String time;
     	long timeRemaining = totaltime - elapsedInSeconds;
+    	return timeRemaining;
+    }
+    public String getRemainingTime(long totaltime) {
+    	//System.out.println(elapsedInSeconds);
+    	String time;
+    	long timeRemaining = this.getRemainingTimeInSec(totaltime);
     	if(timeRemaining<0) {
     		time = String.format("00:00:00");
     	}

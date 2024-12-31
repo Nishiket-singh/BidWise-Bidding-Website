@@ -122,10 +122,6 @@ public class BiddingService {
 		return new ResponseDto("Success", "Won by: " + user.getFirstName());
 		
 	}
-	public String getTimeRemaining() {
-	
-		return "time remaining";
-	}
 	public ResponseDto submitDutchBid(Integer productid,String authorizationToken ) {
 		authorizationToken = authorizationToken.split(" ")[1];
 		User user = tokenRepository.findByToken(authorizationToken).getUser();
@@ -159,5 +155,6 @@ public class BiddingService {
 		}
 		return new ResponseDto("Failed", "The item has been auctioned");
 	}
+	
 	
 }

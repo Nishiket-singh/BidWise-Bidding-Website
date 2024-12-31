@@ -5,7 +5,7 @@ VALUES
 ('Mirage', 'Best Fleetwood Mac Album','Rock', 120, 2000, 'Forward', 12 ),
 ('Currents', 'Tame Impala Psychedelic Album', 'Psychadelic', 130, 4000, 'Forward', 7),
 ('Lonerisms', 'Tame Impala breakthrough album', 'Psychadelic', 140, 5000, 'Forward', 8),
-('Slow Rush', 'Latest Tame Impala album', 'Psychadelic',150, 1000, 'Forward', 9),
+('Slow Rush', 'Latest Tame Impala album', 'Psychadelic',150, 200, 'Forward', 9),
 ('IV', 'Led Zeppelin fourth album', 'Hip Hop', 160, 1500, 'Dutch', 11 ),
 ('Dark Side of the Moon', 'Classic Pink Floyd album', 'Rock',  170, 1200, 'Forward', 13 ),
 ('Wish You Were Here', 'Tyler the Creator latest album', 'Hip Hop', 180, 1400, 'Dutch', 15 ),

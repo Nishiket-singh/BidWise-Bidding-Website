@@ -83,9 +83,9 @@ public class PaymentService {
 		// add logic to send email for receipt here
 		String recipientEmail = user.getEmail(); // set it to users email
 		String subject = "Thanks for your purchase";
-		String content = "Order No: " + order.getId() ; // set to product and payment details
-		content += "Product: " + product.getName();
-		content += "Total: " + total;
+		String content = "Order No: " + order.getId() + "\n" ; // set to product and payment details
+		content += "Product: " + product.getName() + "\n";
+		content += "Total: " + total + "\n";
 		content += "Shipping Address: " + user.getStreetaddress() + ", " + user.getPostalcode() + ", " + user.getCity();
 
 		try {

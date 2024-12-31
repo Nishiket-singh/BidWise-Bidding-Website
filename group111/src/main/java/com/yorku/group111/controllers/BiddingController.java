@@ -52,12 +52,6 @@ public class BiddingController {
 		return biddingService.endForwardBid(productid);
 	}
 	
-	@GetMapping("/getTimeRemaining")
-	public String getTimeRemaining() {
-		
-		return "time left";
-	}
-	
 	@PostMapping("/dutchbid")
 	public ResponseDto submitDutchBid(@RequestParam("productid") Integer productId,@RequestHeader("Authorization") String authorizationToken) {
 		// Item has to be deleted after this bid, 
