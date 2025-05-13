@@ -13,5 +13,5 @@ Full stack web Application with user authentication and authorization features, 
    
 ### The project demo is live and running!!
 
-Official Website: https://bidwise.netlify.app/
+Official Website: https://bidwise.panjabiraj.com/
 Backend Deployment: https://ecombackendapi.onrender.com/
